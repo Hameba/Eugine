@@ -9,7 +9,7 @@ public class Main {
         Game g = new Game("Eugine");
         try {
             AppGameContainer gc = new AppGameContainer(g, 800, 600, false);
-            gc.setTargetFrameRate(60);
+            gc.setTargetFrameRate(30);
             gc.setShowFPS(false);
             gc.start();
         } catch (SlickException e) {
