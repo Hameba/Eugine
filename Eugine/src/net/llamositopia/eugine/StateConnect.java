@@ -25,7 +25,7 @@ public class StateConnect extends BasicGameState {
         g.drawImage(bg, 0, 0);
         g.drawImage(connect, gc.getWidth()/2-connect.getWidth()/2, gc.getHeight()/2+connect.getHeight()/2+gc.getHeight()/5);
         g.setColor(Color.black);
-        g.fillRect(200, 150, 400, 300);
+        g.fillRect(200, 250, 400, 100);
         g.setColor(Color.white);
         g.drawString(ip, gc.getWidth()/2-g.getFont().getWidth(ip)/2, gc.getHeight()/2-g.getFont().getHeight(ip)/2);
         g.drawImage(quit, gc.getWidth()/2-quit.getWidth()/2, gc.getHeight()/2+quit.getHeight()/2+gc.getHeight()/3);
