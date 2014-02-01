@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Eugine">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Eugine/lwjgl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Eugine/slick.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Eugine/jinput.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

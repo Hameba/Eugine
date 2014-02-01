@@ -11,6 +11,7 @@ public class Main {
             AppGameContainer gc = new AppGameContainer(g);
             gc.setTargetFrameRate(60);
             gc.setShowFPS(false);
+            gc.start();
         } catch (SlickException e) {
             e.printStackTrace();
         }
