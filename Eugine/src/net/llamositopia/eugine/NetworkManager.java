@@ -24,9 +24,10 @@ public class NetworkManager {
             oos = new ObjectOutputStream(s.getOutputStream());
             oos.flush();
             ois = new ObjectInputStream(s.getInputStream());
-            oos.writeObject(VH.myChar);
+            oos.writeObject(VH.myChar.getKey());
             if (ois.readBoolean()){
                 String map = (String) ois.readObject();
+                System.out.println("Entering map: " + map);
                 if (map.equals("planes")){
                     VH.sbg.enterState(10);
                 }
@@ -44,6 +45,7 @@ public class NetworkManager {
 
     public static void startServer(){
         try {
+            isServer = true;
             ss = new ServerSocket(2600);
             VH.mapName = "planes";
             new Thread(new Runnable() {
@@ -51,6 +53,7 @@ public class NetworkManager {
                     while (true) {
                         try {
                             Socket s = ss.accept();
+                            System.out.println("Recieved connection attempt from " + s.getInetAddress());
                             ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
                             oos.flush();
                             ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
@@ -66,12 +69,18 @@ public class NetworkManager {
                             if (wrongChar){
                                 oos.writeBoolean(false);
                                 s.close();
+                                System.out.println("Kicking " + s.getInetAddress());
                                 continue;
                             }
                             oos.writeBoolean(true);
                             oos.writeObject(VH.mapName);
                             outs.add(oos);
                             ins.add(ois);
+                            VH.arena.characters.add(Character.valueOf(ch.toUpperCase()));
+                            Character.valueOf(ch.toUpperCase()).setIP(String.valueOf(s.getInetAddress()));
+                            System.out.println(s.getInetAddress() + " has successfully connected to the game.");
+                            Character.valueOf(ch.toUpperCase()).setX(-25);
+                            Character.valueOf(ch.toUpperCase()).setY(0);
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (ClassNotFoundException e) {
@@ -88,6 +97,7 @@ public class NetworkManager {
 
     public static void send(String outData) {
         try {
+            System.out.println("Sending " + outData  + " to the server.");
             oos.writeObject(outData);
             oos.flush();
         } catch (IOException e) {

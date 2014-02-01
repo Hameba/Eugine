@@ -13,19 +13,11 @@ public class StateArenaPlanes extends StateArena {
         return 0;
     }
 
-    public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-
-    }
-
-    public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-
-    }
-
-    public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
-
-    }
-
     protected ArrayList<Floor> getFloors() {
-        return new ArrayList<Floor>();
+        ArrayList<Floor> floors = new ArrayList<Floor>();
+        floors.add(new Floor(32, 32));
+        floors.add(new Floor(32, 40));
+        floors.add(new Floor(32, 48));
+        return floors;
     }
 }

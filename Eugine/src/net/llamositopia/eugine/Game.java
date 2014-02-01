@@ -10,6 +10,7 @@ public class Game extends StateBasedGame {
     }
 
     public void initStatesList(GameContainer gameContainer) throws SlickException {
+        VH.sbg = this;
         addState(new StateMenu());
         addState(new StateConnect());
         addState(new StatePlayerChoose());

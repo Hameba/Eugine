@@ -9,6 +9,8 @@ public class Main {
         Game g = new Game("Eugine");
         try {
             AppGameContainer gc = new AppGameContainer(g, 800, 600, false);
+            VH.gc = gc;
+            gc.setAlwaysRender(true);
             gc.setTargetFrameRate(30);
             gc.setShowFPS(false);
             gc.start();

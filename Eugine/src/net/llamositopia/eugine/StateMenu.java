@@ -17,6 +17,9 @@ public class StateMenu extends BasicGameState {
         bg = new Image("res/img/menu/background.png");
         play = new Image("res/img/menu/play.png");
         quit = new Image("res/img/menu/quit.png");
+        for (Character c : Character.values()){
+            System.out.println("Loaded " + c.getKey());
+        }
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
@@ -29,7 +32,7 @@ public class StateMenu extends BasicGameState {
         if (gc.getInput().isKeyPressed(Input.KEY_F11)){
             gc.setFullscreen(!gc.isFullscreen());
         }
-        if (gc.getInput().isKeyDown(Input.KEY_LCONTROL) && gc.getInput().isKeyDown(Input.KEY_LSHIFT) && gc.getInput().isKeyDown(Input.KEY_F8)){
+        if (gc.getInput().isKeyDown(Input.KEY_LCONTROL) && gc.getInput().isKeyDown(Input.KEY_LALT) && gc.getInput().isKeyDown(Input.KEY_F8)){
             NetworkManager.startServer();
             sbg.enterState(10);
         }

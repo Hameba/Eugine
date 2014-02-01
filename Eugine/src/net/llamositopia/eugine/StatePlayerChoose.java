@@ -50,7 +50,7 @@ public class StatePlayerChoose extends BasicGameState {
                 sbg.enterState(2);
             }
             if (gc.getInput().getMouseX()>gc.getWidth()/2-quit.getWidth()/2 && gc.getInput().getMouseX()<gc.getWidth()/2+quit.getWidth()/2 && gc.getInput().getMouseY()>gc.getHeight()/2-quit.getHeight()/2+gc.getHeight()/3 && gc.getInput().getMouseY()>gc.getHeight()/2+quit.getHeight()/2+gc.getHeight()/3){
-                gc.exit();
+                sbg.enterState(0);
             }
         }
     }

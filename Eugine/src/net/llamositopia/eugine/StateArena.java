@@ -17,12 +17,13 @@ public abstract class StateArena extends BasicGameState{
 
     protected abstract int getArenaID();
 
-    protected ArrayList<Character> characters;
+    protected ArrayList<Character> characters = new ArrayList<Character>();
 
     private Image floorImage;
 
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         floorImage = new Image("res/img/floor.png");
+        VH.arena = this;
     }
 
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
@@ -42,17 +43,6 @@ public abstract class StateArena extends BasicGameState{
             runServerOutputStuff();
             return;
         }
-        String inDataRaw = NetworkManager.receive();
-        String[] inData = inDataRaw.split(";");
-        for (String a : inData){
-            String[] charData = a.split(":");
-            Character c = Character.valueOf(charData[0].toUpperCase());
-            c.setX(Integer.parseInt(charData[1]));
-            c.setY(Integer.parseInt(charData[2]));
-            c.setPr_X(Integer.parseInt(charData[3]));
-            c.setPr_Y(Integer.parseInt(charData[4]));
-            c.setImageInt(Integer.parseInt(charData[5]));
-        }
         String outData = VH.myChar.getKey();
         if (gc.getInput().isKeyDown(Input.KEY_LEFT)){
             outData += outData.equals("") ? outData += "<" : ";<";
@@ -70,6 +60,17 @@ public abstract class StateArena extends BasicGameState{
             outData += outData.equals("") ? outData += "x" : ";x";
         }
         NetworkManager.send(outData);
+        String inDataRaw = NetworkManager.receive();
+        String[] inData = inDataRaw.split(";");
+        for (String a : inData){
+            String[] charData = a.split(":");
+            Character c = Character.valueOf(charData[0].toUpperCase());
+            c.setX(Integer.parseInt(charData[1]));
+            c.setY(Integer.parseInt(charData[2]));
+            c.setPr_X(Integer.parseInt(charData[3]));
+            c.setPr_Y(Integer.parseInt(charData[4]));
+            c.setImageInt(Integer.parseInt(charData[5]));
+        }
     }
 
     private void runServerLogicStuff() {
@@ -84,7 +85,7 @@ public abstract class StateArena extends BasicGameState{
                 continue;
             }
             if (c.risingFrames!=-1){
-                c.setY(c.getY()+8);
+                c.setY(c.getY()-8);
                 c.risingFrames++;
                 if (c.risingFrames==12){
                     c.risingFrames=-1;
@@ -131,16 +132,16 @@ public abstract class StateArena extends BasicGameState{
             }
             for (Floor a : getFloors()){
                 if (c.getY()<a.getY()){
-                    c.setY(c.getY()-1);
+                    c.setY(c.getY()+1);
                 }
                 if (c.getY()<a.getY()){
-                    c.setY(c.getY()-1);
+                    c.setY(c.getY()+1);
                 }
                 if (c.getY()<a.getY()){
-                    c.setY(c.getY()-1);
+                    c.setY(c.getY()+1);
                 }
                 if (c.getY()<a.getY()){
-                    c.setY(c.getY()-1);
+                    c.setY(c.getY()+1);
                 }
             }
             if (c.deadFrames==-1){
@@ -169,6 +170,7 @@ public abstract class StateArena extends BasicGameState{
         for (ObjectInputStream ois : NetworkManager.ins){
             try {
                 String inData = (String) ois.readObject();
+                System.out.println(inData);
                 String[] dataRaw = inData.split(";");
                 Character c = Character.valueOf(dataRaw[0].toUpperCase());
                 for (int i = 0; i < dataRaw.length; i++) {

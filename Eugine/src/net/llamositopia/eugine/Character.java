@@ -17,7 +17,7 @@ public enum Character {
 
     private Image rest, melee1, melee2, melee3, pr;
 
-    private int x, y, pr_x, pr_y, meleeDamage, rangedDamage, maxHealth, health;
+    private int x = -25, y = 0, pr_x = 0, pr_y = 0, meleeDamage, rangedDamage, maxHealth, health;
 
     public int frames = 0, risingFrames = 0, deadFrames = -1;
     public boolean rising = false;
@@ -85,11 +85,11 @@ public enum Character {
         return pr;
     }
 
-    public float getPr_X() {
+    public int getPr_X() {
         return pr_x;
     }
 
-    public float getPr_Y() {
+    public int getPr_Y() {
         return pr_y;
     }
 
@@ -177,5 +177,9 @@ public enum Character {
     public void setPrIsMoving(boolean b, boolean left){
         this.prIsMoving = b;
         this.prIsMovingLeft = left;
+    }
+
+    private int getHealth() {
+        return health;
     }
 }
