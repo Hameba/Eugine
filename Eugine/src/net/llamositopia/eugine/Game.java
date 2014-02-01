@@ -12,6 +12,7 @@ public class Game extends StateBasedGame {
     public void initStatesList(GameContainer gameContainer) throws SlickException {
         addState(new StateMenu());
         addState(new StateConnect());
+        addState(new StateArenaPlanes());
         enterState(0);
     }
 }
