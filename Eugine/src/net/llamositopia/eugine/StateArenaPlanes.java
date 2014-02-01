@@ -5,6 +5,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import java.util.ArrayList;
+
 public class StateArenaPlanes extends StateArena {
 
     public int getArenaID() {
@@ -21,5 +23,9 @@ public class StateArenaPlanes extends StateArena {
 
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
 
+    }
+
+    protected ArrayList<Floor> getFloors() {
+        return new ArrayList<Floor>();
     }
 }

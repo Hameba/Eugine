@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Eugine1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Eugine/mod_Dependances.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Eugine/lwjgl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Eugine/jorbis.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Eugine/jinput.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Eugine/jogg-0.0.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Eugine/slick.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Eugine/255-0-255-To-Transparent.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -16,7 +16,7 @@ public class NetworkManager {
 
     private static boolean isServer = false;
     protected static ArrayList<ObjectOutputStream> outs = new ArrayList<ObjectOutputStream>();
-    private static ArrayList<ObjectInputStream> ins = new ArrayList<ObjectInputStream>();
+    protected static ArrayList<ObjectInputStream> ins = new ArrayList<ObjectInputStream>();
 
     public static void connect(String ip){
         try {
@@ -27,7 +27,9 @@ public class NetworkManager {
             oos.writeObject(VH.myChar);
             if (ois.readBoolean()){
                 String map = (String) ois.readObject();
-
+                if (map.equals("planes")){
+                    VH.sbg.enterState(10);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,6 +45,7 @@ public class NetworkManager {
     public static void startServer(){
         try {
             ss = new ServerSocket(2600);
+            VH.mapName = "planes";
             new Thread(new Runnable() {
                 public void run() {
                     while (true) {
@@ -83,4 +86,23 @@ public class NetworkManager {
         isServer = true;
     }
 
+    public static void send(String outData) {
+        try {
+            oos.writeObject(outData);
+            oos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String receive() {
+        try {
+            return (String) ois.readObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
