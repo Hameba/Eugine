@@ -33,7 +33,7 @@ public enum Character {
     private Character lastDamageSource = null;
     public boolean prIsMovingLeft;
     private boolean prIsMoving = false;
-    private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+    private final ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
     Character(String key, int meleeDamage, int rangedDamage, int maxHealth){
         this.meleeDamage = meleeDamage;
@@ -166,7 +166,7 @@ public enum Character {
         }
     }
 
-    public ArrayList<Projectile> getProjectiles() {
+    public synchronized ArrayList<Projectile> getProjectiles() {
         return projectiles;
     }
 }
