@@ -20,7 +20,7 @@ public class NetworkManager {
 
     public static void connect(String ip){
         try {
-            Socket s = new Socket(ip, 2600);
+            Socket s = new Socket(ip, 21499);
             oos = new ObjectOutputStream(s.getOutputStream());
             oos.flush();
             ois = new ObjectInputStream(s.getInputStream());
@@ -50,7 +50,7 @@ public class NetworkManager {
     public static void startServer(){
         try {
             isServer = true;
-            ss = new ServerSocket(2600);
+            ss = new ServerSocket(21499);
             VH.mapName = "planes";
             new Thread(new Runnable() {
                 public void run() {
