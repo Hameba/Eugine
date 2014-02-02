@@ -137,25 +137,30 @@ public abstract class StateArena extends BasicGameState{
                             }
                         }
                     }
-                    if (c.prIsMoving()){
-                        System.out.println("Start");
-                        System.out.println(true);
-                        System.out.println(c.getPr_X()<c2.getX()+82);
-                        System.out.println(c.getPr_X()+c.getProjectile().getWidth()>c2.getX());
-                        System.out.println(c.getPr_Y()<c2.getY()+32);
-                        System.out.println(c.getPr_Y()+c.getProjectile().getHeight()>c2.getY());
-                        if (c.getPr_X()<c2.getX()+82 && c.getPr_X()+c.getProjectile().getWidth()>c2.getX() && c.getPr_Y()<c2.getY()+32 && c.getPr_Y()+c.getProjectile().getHeight()>c2.getY()){
-                            c2.damage(c.getRangedDamage(), c);
-                            c.setPrIsMoving(false, false);
-                        }
-                    }
                     if (c2.getHealth()<=0){
                         c2.deadFrames = 0;
                     }
                 }
+                if (c.frames!=-1){
+                    c.frames++;
+                }
             }
-            if (c.frames!=-1){
-                c.frames++;
+            for (Character c2 : characters){
+                if (c.prIsMoving()){
+                    System.out.println("Start");
+                    System.out.println(true);
+                    System.out.println(c.getPr_X()<c2.getX()+82);
+                    System.out.println(c.getPr_X()+c.getProjectile().getWidth()>c2.getX());
+                    System.out.println(c.getPr_Y()<c2.getY()+32);
+                    System.out.println(c.getPr_Y()+c.getProjectile().getHeight()>c2.getY());
+                    if (c.getPr_X()<c2.getX()+82 && c.getPr_X()+c.getProjectile().getWidth()>c2.getX() && c.getPr_Y()<c2.getY()+32 && c.getPr_Y()+c.getProjectile().getHeight()>c2.getY()){
+                        c2.damage(c.getRangedDamage(), c);
+                        c.setPrIsMoving(false, false);
+                    }
+                }
+                if (c2.getHealth()<=0){
+                    c2.deadFrames = 0;
+                }
             }
             if (c.frames>5){
                 c.setImageInt(c.getImageInt()+2);
