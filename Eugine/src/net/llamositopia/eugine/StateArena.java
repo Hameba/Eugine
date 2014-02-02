@@ -99,6 +99,19 @@ public abstract class StateArena extends BasicGameState{
                     c.setPr_X(c.getPr_X()+6);
                 }
             }
+            if (c.deadFrames!=-1){
+                c.deadFrames++;
+                if (c.deadFrames>=90){
+                    c.lives--;
+                    if (c.lives>0){
+                        c.deadFrames=-1;
+                        c.setHealth(c.getMaxHealth());
+                    }
+                }
+                c.setX(-100);
+                c.setY(-100);
+                continue;
+            }
             if (c.risingFrames!=-1){
                 if (c.risingFrames<12){
                     c.setY(c.getY()-8);
@@ -108,7 +121,7 @@ public abstract class StateArena extends BasicGameState{
                     c.risingFrames=-1;
                 }
             }
-                for (final Character c2 : characters){
+                for (Character c2 : characters){
                     if (c.equals(c2)){
                         continue;
                     }
@@ -139,17 +152,7 @@ public abstract class StateArena extends BasicGameState{
                 }
                 if (c2.getHealth()<=0){
                     c2.deadFrames = 0;
-                    c.lives--;
-                    new Thread(new Runnable() {
-                        public void run() {
-                            try {
-                                Thread.sleep(3000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            c2.deadFrames = -1;
-                        }
-                    }).start();
+                    c2.setHealth(c2.getMaxHealth());
                 }
             }
             if (c.frames!=-1){
@@ -183,8 +186,8 @@ public abstract class StateArena extends BasicGameState{
                     c.setY(568);
                 }
             }else{
-                c.setX(-100);
-                c.setY(-100);
+                c.setX(-82);
+                c.setY(-32);
             }
         }
     }
