@@ -102,10 +102,14 @@ public abstract class StateArena extends BasicGameState{
             if (c.deadFrames!=-1){
                 c.deadFrames++;
                 if (c.deadFrames>=90){
-                    c.deadFrames=-1;
+                    c.lives--;
+                    if (c.lives>0){
+                        c.deadFrames=-1;
+                        c.setHealth(c.getMaxHealth());
+                    }
                 }
-                c.setX(-25);
-                c.setY(568);
+                c.setX(-100);
+                c.setY(-100);
                 continue;
             }
             if (c.risingFrames!=-1){
@@ -141,6 +145,7 @@ public abstract class StateArena extends BasicGameState{
                     }else{
                         if (c.getPr_X()<=c2.getX()+c2.getImage().getWidth() && c.getPr_X()+c.getProjectile().getWidth()>c2.getX() && c.getPr_Y()<=c2.getY()+c2.getImage().getHeight() && c.getPr_X()+c.getProjectile().getHeight()>c2.getY()){
                             c2.damage(c.getRangedDamage(), c);
+                            c.setPrIsMoving(false, false);
                         }
                     }
                     if (c2.getHealth()<=0){

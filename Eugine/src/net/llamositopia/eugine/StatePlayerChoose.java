@@ -41,7 +41,7 @@ public class StatePlayerChoose extends BasicGameState {
         if (gc.getInput().isKeyPressed(Input.KEY_LEFT) && selected>0){
             selected--;
         }
-        if (gc.getInput().isKeyPressed(Input.KEY_RIGHT) && selected<Character.values().length){
+        if (gc.getInput().isKeyPressed(Input.KEY_RIGHT) && selected<Character.values().length-1){
             selected++;
         }
         if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)){

@@ -27,7 +27,7 @@ public enum Character {
 
     protected int ammo = 15;
 
-    private int lives = 3;
+    public int lives = 3;
     private Character lastDamageSource = null;
     public boolean prIsMovingLeft;
     private boolean prIsMoving = false;
@@ -178,5 +178,9 @@ public enum Character {
 
     public int getHealth() {
         return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 }
