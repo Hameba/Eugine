@@ -102,7 +102,6 @@ public abstract class StateArena extends BasicGameState{
             if (c.deadFrames!=-1){
                 c.deadFrames++;
                 if (c.deadFrames>=90){
-                    c.lives--;
                     if (c.lives>0){
                         c.deadFrames=-1;
                         c.setHealth(c.getMaxHealth());
@@ -152,6 +151,7 @@ public abstract class StateArena extends BasicGameState{
                 }
                 if (c2.getHealth()<=0){
                     c2.deadFrames = 0;
+                    c.lives--;
                 }
             }
             if (c.frames!=-1){
