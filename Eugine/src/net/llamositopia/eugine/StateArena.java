@@ -137,13 +137,18 @@ public abstract class StateArena extends BasicGameState{
                                 if (c.getX() + 25 > a.getX() + 8) {
                                     continue;
                                 }
-                                c.setY(c.getY()-1);
                                 notUp = true;
                             }
                         }
+                        if (!notUp){
+                            c.setY(c.getY()-1);
+                        }else{
+                            break;
+                        }
                     }
                 }
-                if (!notUp) c.risingFrames += 1;
+                if (notUp) c.risingFrames =-1;
+                else c.risingFrames += 1;
                 if (Floor.isOnFloor(c)) {
                     c.risingFrames = -1;
                 }
