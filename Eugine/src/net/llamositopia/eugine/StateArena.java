@@ -104,7 +104,7 @@ public abstract class StateArena extends BasicGameState{
             for (Iterator<Projectile> i = c.getProjectiles().iterator();i.hasNext();){
                 Projectile p = i.next();
                 if (p.getX()<0 || p.getX()>800){
-                    c.getProjectiles().remove(p);
+                    i.remove();
                 }
                 if (p.getLeft()){
                     p.setX(p.getX() - 6);
@@ -155,7 +155,7 @@ public abstract class StateArena extends BasicGameState{
                     Projectile p = i.next();
                     if (p.getX()<c2.getX()+82 && p.getX()+c.getProjectile().getWidth()>c2.getX() && p.getY()<c2.getY()+32 && p.getY()+c.getProjectile().getHeight()>c2.getY()){
                         c2.damage(c.getRangedDamage(), c);
-                        c.getProjectiles().remove(p);
+                        i.remove();
                     }
                 }
                 if (c2.getHealth()<=0){
