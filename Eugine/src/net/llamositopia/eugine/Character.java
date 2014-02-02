@@ -4,6 +4,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
+import java.util.ArrayList;
+
 public enum Character {
 
     MAGE("mage", 10, 20, 80),
@@ -14,7 +16,7 @@ public enum Character {
 
     private Image rest, melee1, melee2, melee3, pr;
 
-    private int x = -25, y = 0, pr_x = 0, pr_y = 0, meleeDamage, rangedDamage, maxHealth, health;
+    private int x = -25, y = 0, meleeDamage, rangedDamage, maxHealth, health;
 
     public int frames = 0, risingFrames = 0, deadFrames = -1;
     public boolean rising = false;
@@ -31,6 +33,7 @@ public enum Character {
     private Character lastDamageSource = null;
     public boolean prIsMovingLeft;
     private boolean prIsMoving = false;
+    private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
     Character(String key, int meleeDamage, int rangedDamage, int maxHealth){
         this.meleeDamage = meleeDamage;
@@ -82,14 +85,6 @@ public enum Character {
         return pr;
     }
 
-    public int getPr_X() {
-        return pr_x;
-    }
-
-    public int getPr_Y() {
-        return pr_y;
-    }
-
     public int getY() {
         return y;
     }
@@ -130,14 +125,6 @@ public enum Character {
         this.y = y;
     }
 
-    public void setPr_X(int pr_X) {
-        this.pr_x = pr_X;
-    }
-
-    public void setPr_Y(int pr_Y) {
-        this.pr_y = pr_Y;
-    }
-
     public void setImageInt(int imageInt) {
         this.imageInt = imageInt;
     }
@@ -159,21 +146,8 @@ public enum Character {
         this.lastDamageSource = source;
     }
 
-    public boolean prIsMovingLeft() {
-        return prIsMovingLeft && prIsMoving();
-    }
-
-    public boolean prIsMoving() {
-        return prIsMoving;
-    }
-
     public Character getLastDamageSource(){
         return lastDamageSource;
-    }
-
-    public void setPrIsMoving(boolean b, boolean left){
-        this.prIsMoving = b;
-        this.prIsMovingLeft = left;
     }
 
     public int getHealth() {
@@ -182,5 +156,17 @@ public enum Character {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public void launchProjectile(boolean left){
+        if (left){
+
+        }else{
+
+        }
+    }
+
+    public ArrayList<Projectile> getProjectiles() {
+        return projectiles;
     }
 }

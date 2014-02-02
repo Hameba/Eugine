@@ -26,7 +26,10 @@ public abstract class StateArena extends BasicGameState{
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         floorImage = new Image("res/img/floor.png");
         VH.arena = this;
+        bg = getBackground();
     }
+
+    public abstract Image getBackground() throws SlickException;
 
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         if (bg!=null){
@@ -34,7 +37,9 @@ public abstract class StateArena extends BasicGameState{
         }
         for (Character c : characters){
             System.out.println(c.getX() + " " + c.getY());
-            graphics.drawImage(c.getProjectile(), c.getPr_X(), c.getPr_Y());
+            for (Projectile p : c.getProjectiles()){
+                graphics.drawImage(p.getImage(), p.getX(), p.getY());
+            }
             graphics.drawImage(c.getImage(), c.getX(), c.getY());
         }
         for (Floor a : getFloors()){
@@ -78,25 +83,27 @@ public abstract class StateArena extends BasicGameState{
             }
             c.setX(Integer.parseInt(charData[1]));
             c.setY(Integer.parseInt(charData[2]));
-            c.setPr_X(Integer.parseInt(charData[3]));
-            c.setPr_Y(Integer.parseInt(charData[4]));
-            c.setImageInt(Integer.parseInt(charData[5]));
-            System.out.println(c.getKey() + ":" + c.getX() + ":" + c.getY() + ":" + c.getPr_X() + ":" + c.getPr_Y() + ":" + c.getImageInt());
+            c.setImageInt(Integer.parseInt(charData[3]));
+            for (int j = 0; j < charData.length; j++) {
+                if (j<4){
+                    continue;
+                }
+                c.getProjectiles().add(new Projectile(Integer.parseInt(charData[j]), Integer.parseInt(charData[j+1]), c, false));
+                j++;
+            }
         }
     }
 
     private void runServerLogicStuff() {
         for (Character c : characters){
-            if (!c.prIsMoving() || c.getPr_X()<0 || c.getPr_X()>800){
-                c.setPr_X(c.getX()+c.getImage().getWidth()/2);
-                c.setPr_Y(c.getY()+c.getImage().getHeight()/2);
-                c.setPrIsMoving(false, false);
-            }
-            if (c.prIsMoving()){
-                if (c.prIsMovingLeft()){
-                    c.setPr_X(c.getPr_X()-6);
+            for (Projectile p : c.getProjectiles()){
+                if (p.getX()<0 || p.getX()>800){
+                    c.getProjectiles().remove(p);
+                }
+                if (p.getLeft()){
+                    p.setX(p.getX() - 6);
                 }else{
-                    c.setPr_X(c.getPr_X()+6);
+                    p.setX(p.getX() + 6);
                 }
             }
             if (c.deadFrames!=-1){
@@ -138,16 +145,10 @@ public abstract class StateArena extends BasicGameState{
                             }
                         }
                     }
-                if (c.prIsMoving()){
-                    System.out.println("Start");
-                    System.out.println(true);
-                    System.out.println(c.getPr_X()<c2.getX()+82);
-                    System.out.println(c.getPr_X()+c.getProjectile().getWidth()>c2.getX());
-                    System.out.println(c.getPr_Y()<c2.getY()+32);
-                    System.out.println(c.getPr_Y()+c.getProjectile().getHeight()>c2.getY());
-                    if (c.getPr_X()<c2.getX()+82 && c.getPr_X()+c.getProjectile().getWidth()>c2.getX() && c.getPr_Y()<c2.getY()+32 && c.getPr_Y()+c.getProjectile().getHeight()>c2.getY()){
+                for (Projectile p : c.getProjectiles()){
+                    if (p.getX()<c2.getX()+82 && p.getX()+c.getProjectile().getWidth()>c2.getX() && p.getY()<c2.getY()+32 && p.getY()+c.getProjectile().getHeight()>c2.getY()){
                         c2.damage(c.getRangedDamage(), c);
-                        c.setPrIsMoving(false, false);
+                        c.getProjectiles().remove(p);
                     }
                 }
                 if (c2.getHealth()<=0){
@@ -230,10 +231,8 @@ public abstract class StateArena extends BasicGameState{
                         }
                     }
                     if (dataRaw[i].equals("x")){
-                        if (c.ammo>0 && !c.prIsMoving()){
-                            c.setPrIsMoving(true, c.isFacingLeft());
-                            c.setPr_X(c.isFacingLeft() ? c.getX()+25 : c.getX()+57);
-                            c.setPr_Y(c.getY()+c.getImage().getHeight()/2);
+                        if (c.ammo>0){
+                            c.getProjectiles().add(new Projectile(c.isFacingLeft() ? c.getX() + 25 : c.getX() + 57, c.getY() + c.getImage().getHeight() / 2, c, c.isFacingLeft()));
                             c.ammo--;
                         }
                     }
@@ -252,9 +251,10 @@ public abstract class StateArena extends BasicGameState{
             data += data.equals("") ? "" + c.getKey() : ";" + c.getKey();
             data += ":" + c.getX() + ":";
             data += c.getY() + ":";
-            data += c.getPr_X() + ":";
-            data += c.getPr_Y() + ":";
             data += c.getImageInt();
+            for (Projectile p : c.getProjectiles()){
+                data += ":" + p.getX() + ":" + p.getY();
+            }
         }
         for (ObjectOutputStream oos : NetworkManager.outs){
             try {

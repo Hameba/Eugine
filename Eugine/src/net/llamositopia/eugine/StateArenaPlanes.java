@@ -14,9 +14,8 @@ public class StateArenaPlanes extends StateArena {
         return 0;
     }
 
-    public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        super.init(gameContainer, stateBasedGame);
-        bg = new Image("res/img/background.png");
+    public Image getBackground() throws SlickException {
+        return new Image("res/img/background.png");
     }
 
     protected ArrayList<Floor> getFloors() {
