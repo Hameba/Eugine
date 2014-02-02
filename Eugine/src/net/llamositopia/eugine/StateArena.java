@@ -137,13 +137,8 @@ public abstract class StateArena extends BasicGameState{
                             }
                         }
                     }
-                    if (c.prIsMovingLeft()){
-                        if (c.getPr_X()<=c2.getX()+c2.getImage().getWidth() && c.getPr_X()+c.getProjectile().getWidth()>c2.getX() && c.getPr_Y()<=c2.getY()+c2.getImage().getHeight() && c.getPr_X()+c.getProjectile().getHeight()>c2.getY()){
-                            c2.damage(c.getRangedDamage(), c);
-                            c.setPrIsMoving(false, false);
-                        }
-                    }else{
-                        if (c.getPr_X()<=c2.getX()+c2.getImage().getWidth() && c.getPr_X()+c.getProjectile().getWidth()>c2.getX() && c.getPr_Y()<=c2.getY()+c2.getImage().getHeight() && c.getPr_X()+c.getProjectile().getHeight()>c2.getY()){
+                    if (c.prIsMoving()){
+                        if (c.getPr_X()<c2.getX()+82 && c.getPr_X()+c.getProjectile().getWidth()>c2.getX() && c.getPr_Y()<c2.getY()+32 && c.getPr_Y()+c.getProjectile().getHeight()>c2.getY()){
                             c2.damage(c.getRangedDamage(), c);
                             c.setPrIsMoving(false, false);
                         }
