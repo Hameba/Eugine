@@ -84,6 +84,7 @@ public abstract class StateArena extends BasicGameState{
             c.setX(Integer.parseInt(charData[1]));
             c.setY(Integer.parseInt(charData[2]));
             c.setImageInt(Integer.parseInt(charData[3]));
+            c.getProjectiles().clear();
             for (int j = 0; j < charData.length; j++) {
                 if (j<4){
                     continue;
