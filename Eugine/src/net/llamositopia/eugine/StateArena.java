@@ -64,10 +64,10 @@ public abstract class StateArena extends BasicGameState{
         if (gc.getInput().isKeyDown(Input.KEY_RIGHT)){
             outData += outData.equals("") ? outData += ">" : ";>";
         }
-        if (gc.getInput().isKeyDown(Input.KEY_Z)){
+        if (gc.getInput().isKeyPressed(Input.KEY_Z)){
             outData += outData.equals("") ? outData += "z" : ";z";
         }
-        if (gc.getInput().isKeyDown(Input.KEY_X)){
+        if (gc.getInput().isKeyPressed(Input.KEY_X)){
             outData += outData.equals("") ? outData += "x" : ";x";
         }
         NetworkManager.send(outData);
