@@ -15,9 +15,9 @@ public class StateArenaPlanes extends StateArena {
 
     protected ArrayList<Floor> getFloors() {
         ArrayList<Floor> floors = new ArrayList<Floor>();
-        floors.add(new Floor(32, 32));
-        floors.add(new Floor(32, 40));
-        floors.add(new Floor(32, 48));
+        floors.add(new Floor(128, 128));
+        floors.add(new Floor(136, 128));
+        floors.add(new Floor(144, 128));
         return floors;
     }
 }

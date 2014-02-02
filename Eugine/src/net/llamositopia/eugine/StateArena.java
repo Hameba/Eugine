@@ -28,6 +28,7 @@ public abstract class StateArena extends BasicGameState{
 
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         for (Character c : characters){
+            System.out.println(c.getX() + " " + c.getY());
             graphics.drawImage(c.getProjectile(), c.getPr_X(), c.getPr_Y());
             graphics.drawImage(c.getImage(), c.getX(), c.getY());
         }
@@ -61,8 +62,10 @@ public abstract class StateArena extends BasicGameState{
         }
         NetworkManager.send(outData);
         String inDataRaw = NetworkManager.receive();
+        System.out.println("Received " + inDataRaw + " from the server.");
         String[] inData = inDataRaw.split(";");
         for (String a : inData){
+            System.out.println("Using " + a);
             String[] charData = a.split(":");
             Character c = Character.valueOf(charData[0].toUpperCase());
             c.setX(Integer.parseInt(charData[1]));
@@ -70,6 +73,7 @@ public abstract class StateArena extends BasicGameState{
             c.setPr_X(Integer.parseInt(charData[3]));
             c.setPr_Y(Integer.parseInt(charData[4]));
             c.setImageInt(Integer.parseInt(charData[5]));
+            System.out.println(c.getKey() + ":" + c.getX() + ":" + c.getY() + ":" + c.getPr_X() + ":" + c.getPr_Y() + ":" + c.getImageInt());
         }
     }
 
@@ -77,7 +81,7 @@ public abstract class StateArena extends BasicGameState{
         for (Character c : characters){
             if (c.deadFrames!=-1){
                 c.deadFrames++;
-                if (c.deadFrames>=180){
+                if (c.deadFrames>=90){
                     c.deadFrames=-1;
                 }
                 c.setX(-25);
@@ -87,11 +91,11 @@ public abstract class StateArena extends BasicGameState{
             if (c.risingFrames!=-1){
                 c.setY(c.getY()-8);
                 c.risingFrames++;
-                if (c.risingFrames==12){
+                if (c.risingFrames>=12){
                     c.risingFrames=-1;
                 }
             }
-            if (c.frames==0 && c.getImageInt()==2){
+            if (c.frames==0 && (c.getImageInt()==2 || c.getImageInt()==3)){
                 for (Character c2 : characters){
                     if (c.equals(c2)){
                         continue;
@@ -130,17 +134,8 @@ public abstract class StateArena extends BasicGameState{
                     c.frames=0;
                 }
             }
-            for (Floor a : getFloors()){
-                if (c.getY()<a.getY()){
-                    c.setY(c.getY()+1);
-                }
-                if (c.getY()<a.getY()){
-                    c.setY(c.getY()+1);
-                }
-                if (c.getY()<a.getY()){
-                    c.setY(c.getY()+1);
-                }
-                if (c.getY()<a.getY()){
+            for (int i = 0; i < 4; i++) {
+                if (!Floor.isOnFloor(c)){
                     c.setY(c.getY()+1);
                 }
             }
@@ -177,21 +172,29 @@ public abstract class StateArena extends BasicGameState{
                     if (c.deadFrames!=-1){break;}
                     if (i==0) continue;
                     if (dataRaw[i].equals("<")){
-                        c.setIsFacingLeft(true);
-                        c.setImageInt(1);
+                        if (c.frames==-1){
+                            c.setIsFacingLeft(true);
+                            c.setImageInt(1);
+                        }
                         c.setX(c.getX()-2);
                     }
                     if (dataRaw[i].equals("^")){
-                        c.risingFrames = c.risingFrames==-1 ? c.risingFrames++ : c.risingFrames;
+                        if (c.risingFrames==-1){
+                            c.risingFrames++;
+                        }
                     }
                     if (dataRaw[i].equals(">")){
-                        c.setIsFacingLeft(false);
-                        c.setImageInt(0);
+                        if (c.frames==-1){
+                            c.setIsFacingLeft(false);
+                            c.setImageInt(0);
+                        }
                         c.setX(c.getX()+2);
                     }
                     if (dataRaw[i].equals("z")){
-                        c.setImageInt(c.getImageInt()+2);
-                        c.frames++;
+                        if (c.getImageInt()==1 || c.getImageInt()==0){
+                            c.setImageInt(c.getImageInt()+2);
+                            c.frames++;
+                        }
                     }
                     if (dataRaw[i].equals("x")){
                         c.setPrIsMoving(true, c.isFacingLeft());
