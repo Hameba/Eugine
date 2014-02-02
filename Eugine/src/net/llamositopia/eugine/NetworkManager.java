@@ -15,8 +15,8 @@ public class NetworkManager {
     private static ServerSocket ss;
 
     private static boolean isServer = false;
-    protected static ArrayList<ObjectOutputStream> outs = new ArrayList<ObjectOutputStream>();
-    protected static ArrayList<ObjectInputStream> ins = new ArrayList<ObjectInputStream>();
+    protected static final ArrayList<ObjectOutputStream> outs = new ArrayList<ObjectOutputStream>();
+    protected static final ArrayList<ObjectInputStream> ins = new ArrayList<ObjectInputStream>();
 
     public static void connect(String ip){
         try {
@@ -86,8 +86,10 @@ public class NetworkManager {
                             }
                             oos.writeObject(chars);
                             oos.writeObject(VH.mapName);
-                            outs.add(oos);
-                            ins.add(ois);
+                            synchronized (outs){
+                                outs.add(oos);
+                                ins.add(ois);
+                            }
                             VH.arena.characters.add(Character.valueOf(ch.toUpperCase()));
                             Character.valueOf(ch.toUpperCase()).setIP(String.valueOf(s.getInetAddress()));
                             System.out.println(s.getInetAddress() + " has successfully connected to the game as the " + ch + ".");
