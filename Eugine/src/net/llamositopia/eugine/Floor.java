@@ -30,12 +30,14 @@ public class Floor {
 
     public static boolean isOnFloor(Character c){
         for (Floor a : floors){
-            if (c.getY()+32<a.getY()){
-                if (c.getX()+25>a.getX()){
-                    if (c.getX()+57<a.getX()+8){
-                        return true;
-                    }
+            if (c.getY()+32==a.getY()){
+                if (c.getX()+57<a.getX()){
+                    continue;
                 }
+                if (c.getX()+25>a.getX()+8){
+                    continue;
+                }
+                return true;
             }
         }
         return !(c.getY()<568);

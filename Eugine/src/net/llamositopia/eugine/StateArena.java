@@ -73,6 +73,9 @@ public abstract class StateArena extends BasicGameState{
             System.out.println("Using " + a);
             String[] charData = a.split(":");
             Character c = Character.valueOf(charData[0].toUpperCase());
+            if (!characters.contains(c)){
+                characters.add(c);
+            }
             c.setX(Integer.parseInt(charData[1]));
             c.setY(Integer.parseInt(charData[2]));
             c.setPr_X(Integer.parseInt(charData[3]));
@@ -121,23 +124,27 @@ public abstract class StateArena extends BasicGameState{
                     }
                     if (c.getY()<c2.getY()+32 && c.getY()+32>c2.getY()){
                         if (c.isFacingLeft()){
-                            if (c.getX()<=c2.getX()+c2.getImage().getWidth() && c.getX()+c.getImage().getWidth()-35>c2.getX()){
+                            if (c.getX()<=c2.getX()+c2.getImage().getWidth() && c.getX()+c.getImage().getWidth()-25>c2.getX() && c.getY()<=c2.getY()+c2.getImage().getHeight() && c.getY()+c.getImage().getHeight()>c2.getY()){
                                 c2.damage(c.getMeleeDamage(), c);
                             }
                         }else{
-                            if (c.getX()<=c2.getX()+c2.getImage().getWidth() && c.getX()+c.getImage().getWidth()+35>c2.getX()){
+                            if (c.getX()<=c2.getX()+c2.getImage().getWidth() && c.getX()+c.getImage().getWidth()+25>c2.getX() && c.getY()<=c2.getY()+c2.getImage().getHeight() && c.getY()+c.getImage().getHeight()>c2.getY()){
                                 c2.damage(c.getMeleeDamage(), c);
                             }
                         }
                     }
                     if (c.prIsMovingLeft()){
-                        if (c.getPr_X()<=c2.getX()+c2.getImage().getWidth() && c.getPr_X()+c.getProjectile().getWidth()-35>c2.getX()){
+                        if (c.getPr_X()<=c2.getX()+c2.getImage().getWidth() && c.getPr_X()+c.getProjectile().getWidth()>c2.getX() && c.getPr_Y()<=c2.getY()+c2.getImage().getHeight() && c.getPr_X()+c.getProjectile().getHeight()>c2.getY()){
                             c2.damage(c.getRangedDamage(), c);
+                            c.setPrIsMoving(false, false);
                         }
                     }else{
-                        if (c.getPr_X()<=c2.getX()+c2.getImage().getWidth() && c.getPr_X()+c.getProjectile().getWidth()+35>c2.getX()){
+                        if (c.getPr_X()<=c2.getX()+c2.getImage().getWidth() && c.getPr_X()+c.getProjectile().getWidth()>c2.getX() && c.getPr_Y()<=c2.getY()+c2.getImage().getHeight() && c.getPr_X()+c.getProjectile().getHeight()>c2.getY()){
                             c2.damage(c.getRangedDamage(), c);
                         }
+                    }
+                    if (c2.getHealth()<=0){
+                        c2.deadFrames = 0;
                     }
                 }
             }

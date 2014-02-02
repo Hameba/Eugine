@@ -176,7 +176,7 @@ public enum Character {
         this.prIsMovingLeft = left;
     }
 
-    private int getHealth() {
+    public int getHealth() {
         return health;
     }
 }
