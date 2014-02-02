@@ -10,7 +10,7 @@ public enum Character {
 
     MAGE("mage", 10, 20, 80),
     NINJA("ninja", 15, 10, 90),
-    SLAYER("slayer", 20, 10, 100),
+    BRUISER("bruiser", 20, 10, 100),
     ARCHER("archer", 10, 15, 85),
     ;
 
