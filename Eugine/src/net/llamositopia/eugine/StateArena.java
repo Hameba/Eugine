@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public abstract class StateArena extends BasicGameState{
 
@@ -37,7 +38,8 @@ public abstract class StateArena extends BasicGameState{
         }
         for (Character c : characters){
             System.out.println(c.getX() + " " + c.getY());
-            for (Projectile p : c.getProjectiles()){
+            for (Iterator<Projectile> i = c.getProjectiles().iterator();i.hasNext();){
+                Projectile p = i.next();
                 graphics.drawImage(p.getImage(), p.getX(), p.getY());
             }
             graphics.drawImage(c.getImage(), c.getX(), c.getY());
@@ -99,16 +101,15 @@ public abstract class StateArena extends BasicGameState{
 
     private void runServerLogicStuff() {
         for (Character c : characters){
-            synchronized (c.getProjectiles()){
-                for (Projectile p : c.getProjectiles()){
-                    if (p.getX()<0 || p.getX()>800){
-                        c.getProjectiles().remove(p);
-                    }
-                    if (p.getLeft()){
-                        p.setX(p.getX() - 6);
-                    }else{
-                        p.setX(p.getX() + 6);
-                    }
+            for (Iterator<Projectile> i = c.getProjectiles().iterator();i.hasNext();){
+                Projectile p = i.next();
+                if (p.getX()<0 || p.getX()>800){
+                    c.getProjectiles().remove(p);
+                }
+                if (p.getLeft()){
+                    p.setX(p.getX() - 6);
+                }else{
+                    p.setX(p.getX() + 6);
                 }
             }
             if (c.deadFrames!=-1){
@@ -150,12 +151,11 @@ public abstract class StateArena extends BasicGameState{
                         }
                     }
                 }
-                synchronized (c.getProjectiles()){
-                    for (Projectile p : c.getProjectiles()){
-                        if (p.getX()<c2.getX()+82 && p.getX()+c.getProjectile().getWidth()>c2.getX() && p.getY()<c2.getY()+32 && p.getY()+c.getProjectile().getHeight()>c2.getY()){
-                            c2.damage(c.getRangedDamage(), c);
-                            c.getProjectiles().remove(p);
-                        }
+                for (Iterator<Projectile> i = c.getProjectiles().iterator();i.hasNext();){
+                    Projectile p = i.next();
+                    if (p.getX()<c2.getX()+82 && p.getX()+c.getProjectile().getWidth()>c2.getX() && p.getY()<c2.getY()+32 && p.getY()+c.getProjectile().getHeight()>c2.getY()){
+                        c2.damage(c.getRangedDamage(), c);
+                        c.getProjectiles().remove(p);
                     }
                 }
                 if (c2.getHealth()<=0){
@@ -203,55 +203,54 @@ public abstract class StateArena extends BasicGameState{
     protected abstract ArrayList<Floor> getFloors();
 
     private synchronized void runServerInputStuff() {
-        synchronized (NetworkManager.ins){
-            for (ObjectInputStream ois : NetworkManager.ins){
-                try {
-                    String inData = (String) ois.readObject();
-                    System.out.println(inData);
-                    String[] dataRaw = inData.split(";");
-                    Character c = Character.valueOf(dataRaw[0].toUpperCase());
-                    for (int i = 0; i < dataRaw.length; i++) {
-                        if (c.deadFrames!=-1){break;}
-                        if (i==0) continue;
-                        if (dataRaw[i].equals("<")){
-                            if (c.frames==-1){
-                                c.setIsFacingLeft(true);
-                                c.setImageInt(1);
-                            }
-                            c.setX(c.getX()-2);
+        for (Iterator<ObjectInputStream> j = NetworkManager.ins.iterator();j.hasNext();){
+            ObjectInputStream ois = j.next();
+            try {
+                String inData = (String) ois.readObject();
+                System.out.println(inData);
+                String[] dataRaw = inData.split(";");
+                Character c = Character.valueOf(dataRaw[0].toUpperCase());
+                for (int i = 0; i < dataRaw.length; i++) {
+                    if (c.deadFrames!=-1){break;}
+                    if (i==0) continue;
+                    if (dataRaw[i].equals("<")){
+                        if (c.frames==-1){
+                            c.setIsFacingLeft(true);
+                            c.setImageInt(1);
                         }
-                        if (dataRaw[i].equals("^")){
-                            if (c.risingFrames==-1){
-                                c.risingFrames=0;
-                            }
+                        c.setX(c.getX()-2);
+                    }
+                    if (dataRaw[i].equals("^")){
+                        if (c.risingFrames==-1){
+                            c.risingFrames=0;
                         }
-                        if (dataRaw[i].equals(">")){
-                            if (c.frames==-1){
-                                c.setIsFacingLeft(false);
-                                c.setImageInt(0);
-                            }
-                            c.setX(c.getX()+2);
+                    }
+                    if (dataRaw[i].equals(">")){
+                        if (c.frames==-1){
+                            c.setIsFacingLeft(false);
+                            c.setImageInt(0);
                         }
-                        if (dataRaw[i].equals("z")){
-                            if (c.getImageInt()==1 || c.getImageInt()==0){
-                                c.setImageInt(c.getImageInt()+2);
-                                c.frames++;
-                            }
+                        c.setX(c.getX()+2);
+                    }
+                    if (dataRaw[i].equals("z")){
+                        if (c.getImageInt()==1 || c.getImageInt()==0){
+                            c.setImageInt(c.getImageInt()+2);
+                            c.frames++;
                         }
-                        if (dataRaw[i].equals("x")){
-                            if (c.ammo>0){
-                                synchronized (c.getProjectiles()){
-                                    c.getProjectiles().add(new Projectile(c.isFacingLeft() ? c.getX() + 25 : c.getX() + 57, c.getY() + c.getImage().getHeight() / 2, c, c.isFacingLeft()));
-                                    c.ammo--;
-                                }
+                    }
+                    if (dataRaw[i].equals("x")){
+                        if (c.ammo>0){
+                            synchronized (c.getProjectiles()){
+                                c.getProjectiles().add(new Projectile(c.isFacingLeft() ? c.getX() + 25 : c.getX() + 57, c.getY() + c.getImage().getHeight() / 2, c, c.isFacingLeft()));
+                                c.ammo--;
                             }
                         }
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -263,7 +262,8 @@ public abstract class StateArena extends BasicGameState{
             data += ":" + c.getX() + ":";
             data += c.getY() + ":";
             data += c.getImageInt();
-            for (Projectile p : c.getProjectiles()){
+            for (Iterator<Projectile> i = c.getProjectiles().iterator();i.hasNext();){
+                Projectile p = i.next();
                 data += ":" + p.getX() + ":" + p.getY();
             }
         }
