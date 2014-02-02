@@ -84,13 +84,15 @@ public abstract class StateArena extends BasicGameState{
             c.setX(Integer.parseInt(charData[1]));
             c.setY(Integer.parseInt(charData[2]));
             c.setImageInt(Integer.parseInt(charData[3]));
-            c.getProjectiles().clear();
-            for (int j = 0; j < charData.length; j++) {
-                if (j<4){
-                    continue;
+            synchronized (c.getProjectiles()){
+                c.getProjectiles().clear();
+                for (int j = 0; j < charData.length; j++) {
+                    if (j<4){
+                        continue;
+                    }
+                    c.getProjectiles().add(new Projectile(Integer.parseInt(charData[j]), Integer.parseInt(charData[j+1]), c, false));
+                    j++;
                 }
-                c.getProjectiles().add(new Projectile(Integer.parseInt(charData[j]), Integer.parseInt(charData[j+1]), c, false));
-                j++;
             }
         }
     }
@@ -238,8 +240,10 @@ public abstract class StateArena extends BasicGameState{
                         }
                         if (dataRaw[i].equals("x")){
                             if (c.ammo>0){
-                                c.getProjectiles().add(new Projectile(c.isFacingLeft() ? c.getX() + 25 : c.getX() + 57, c.getY() + c.getImage().getHeight() / 2, c, c.isFacingLeft()));
-                                c.ammo--;
+                                synchronized (c.getProjectiles()){
+                                    c.getProjectiles().add(new Projectile(c.isFacingLeft() ? c.getX() + 25 : c.getX() + 57, c.getY() + c.getImage().getHeight() / 2, c, c.isFacingLeft()));
+                                    c.ammo--;
+                                }
                             }
                         }
                     }
