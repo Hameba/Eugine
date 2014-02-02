@@ -97,14 +97,16 @@ public abstract class StateArena extends BasicGameState{
 
     private void runServerLogicStuff() {
         for (Character c : characters){
-            for (Projectile p : c.getProjectiles()){
-                if (p.getX()<0 || p.getX()>800){
-                    c.getProjectiles().remove(p);
-                }
-                if (p.getLeft()){
-                    p.setX(p.getX() - 6);
-                }else{
-                    p.setX(p.getX() + 6);
+            synchronized (c.getProjectiles()){
+                for (Projectile p : c.getProjectiles()){
+                    if (p.getX()<0 || p.getX()>800){
+                        c.getProjectiles().remove(p);
+                    }
+                    if (p.getLeft()){
+                        p.setX(p.getX() - 6);
+                    }else{
+                        p.setX(p.getX() + 6);
+                    }
                 }
             }
             if (c.deadFrames!=-1){
@@ -129,27 +131,29 @@ public abstract class StateArena extends BasicGameState{
                     c.risingFrames=-1;
                 }
             }
-                for (Character c2 : characters){
-                    if (c.equals(c2)){
-                        continue;
-                    }
-                    if (c.frames==0 && (c.getImageInt()==2 || c.getImageInt()==3)){
-                        if (c.getY()<c2.getY()+32 && c.getY()+32>c2.getY()){
-                            if (c.isFacingLeft()){
-                                if (c.getX()<=c2.getX()+c2.getImage().getWidth() && c.getX()+c.getImage().getWidth()-25>c2.getX() && c.getY()<=c2.getY()+c2.getImage().getHeight() && c.getY()+c.getImage().getHeight()>c2.getY()){
-                                    c2.damage(c.getMeleeDamage(), c);
-                                }
-                            }else{
-                                if (c.getX()<=c2.getX()+c2.getImage().getWidth() && c.getX()+c.getImage().getWidth()+25>c2.getX() && c.getY()<=c2.getY()+c2.getImage().getHeight() && c.getY()+c.getImage().getHeight()>c2.getY()){
-                                    c2.damage(c.getMeleeDamage(), c);
-                                }
+            for (Character c2 : characters){
+                if (c.equals(c2)){
+                    continue;
+                }
+                if (c.frames==0 && (c.getImageInt()==2 || c.getImageInt()==3)){
+                    if (c.getY()<c2.getY()+32 && c.getY()+32>c2.getY()){
+                        if (c.isFacingLeft()){
+                            if (c.getX()<=c2.getX()+c2.getImage().getWidth() && c.getX()+c.getImage().getWidth()-25>c2.getX() && c.getY()<=c2.getY()+c2.getImage().getHeight() && c.getY()+c.getImage().getHeight()>c2.getY()){
+                                c2.damage(c.getMeleeDamage(), c);
+                            }
+                        }else{
+                            if (c.getX()<=c2.getX()+c2.getImage().getWidth() && c.getX()+c.getImage().getWidth()+25>c2.getX() && c.getY()<=c2.getY()+c2.getImage().getHeight() && c.getY()+c.getImage().getHeight()>c2.getY()){
+                                c2.damage(c.getMeleeDamage(), c);
                             }
                         }
                     }
-                for (Projectile p : c.getProjectiles()){
-                    if (p.getX()<c2.getX()+82 && p.getX()+c.getProjectile().getWidth()>c2.getX() && p.getY()<c2.getY()+32 && p.getY()+c.getProjectile().getHeight()>c2.getY()){
-                        c2.damage(c.getRangedDamage(), c);
-                        c.getProjectiles().remove(p);
+                }
+                synchronized (c.getProjectiles()){
+                    for (Projectile p : c.getProjectiles()){
+                        if (p.getX()<c2.getX()+82 && p.getX()+c.getProjectile().getWidth()>c2.getX() && p.getY()<c2.getY()+32 && p.getY()+c.getProjectile().getHeight()>c2.getY()){
+                            c2.damage(c.getRangedDamage(), c);
+                            c.getProjectiles().remove(p);
+                        }
                     }
                 }
                 if (c2.getHealth()<=0){
