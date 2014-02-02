@@ -187,7 +187,7 @@ public abstract class StateArena extends BasicGameState{
 
     protected abstract ArrayList<Floor> getFloors();
 
-    private void runServerInputStuff() {
+    private synchronized void runServerInputStuff() {
         for (ObjectInputStream ois : NetworkManager.ins){
             try {
                 String inData = (String) ois.readObject();
