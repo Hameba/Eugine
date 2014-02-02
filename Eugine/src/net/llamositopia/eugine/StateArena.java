@@ -29,6 +29,9 @@ public abstract class StateArena extends BasicGameState{
     }
 
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
+        if (bg!=null){
+            graphics.drawImage(bg, 0, 0);
+        }
         for (Character c : characters){
             System.out.println(c.getX() + " " + c.getY());
             graphics.drawImage(c.getProjectile(), c.getPr_X(), c.getPr_Y());
@@ -81,6 +84,18 @@ public abstract class StateArena extends BasicGameState{
 
     private void runServerLogicStuff() {
         for (Character c : characters){
+            if (!c.prIsMoving() || c.getPr_X()<0 || c.getPr_X()>800){
+                c.setPr_X(c.getX()+c.getImage().getWidth()/2);
+                c.setPr_Y(c.getY()+c.getImage().getHeight()/2);
+                c.setPrIsMoving(false, false);
+            }
+            if (c.prIsMoving()){
+                if (c.prIsMovingLeft()){
+                    c.setPr_X(c.getPr_X()-6);
+                }else{
+                    c.setPr_X(c.getPr_X()+6);
+                }
+            }
             if (c.deadFrames!=-1){
                 c.deadFrames++;
                 if (c.deadFrames>=90){
@@ -91,9 +106,11 @@ public abstract class StateArena extends BasicGameState{
                 continue;
             }
             if (c.risingFrames!=-1){
-                c.setY(c.getY()-8);
-                c.risingFrames++;
-                if (c.risingFrames>=12){
+                if (c.risingFrames<12){
+                    c.setY(c.getY()-8);
+                }
+                c.risingFrames+=1;
+                if (Floor.isOnFloor(c)){
                     c.risingFrames=-1;
                 }
             }
@@ -182,7 +199,7 @@ public abstract class StateArena extends BasicGameState{
                     }
                     if (dataRaw[i].equals("^")){
                         if (c.risingFrames==-1){
-                            c.risingFrames++;
+                            c.risingFrames=0;
                         }
                     }
                     if (dataRaw[i].equals(">")){
@@ -199,7 +216,12 @@ public abstract class StateArena extends BasicGameState{
                         }
                     }
                     if (dataRaw[i].equals("x")){
-                        c.setPrIsMoving(true, c.isFacingLeft());
+                        if (c.ammo>0 && !c.prIsMoving()){
+                            c.setPrIsMoving(true, c.isFacingLeft());
+                            c.setPr_X(c.isFacingLeft() ? c.getX()+25 : c.getX()+57);
+                            c.setPr_Y(c.getY()+c.getImage().getHeight()/2);
+                            c.ammo--;
+                        }
                     }
                 }
             } catch (IOException e) {

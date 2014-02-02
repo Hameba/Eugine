@@ -26,10 +26,14 @@ public class NetworkManager {
             ois = new ObjectInputStream(s.getInputStream());
             oos.writeObject(VH.myChar.getKey());
             if (ois.readBoolean()){
+                String chars = (String) ois.readObject();
                 String map = (String) ois.readObject();
                 System.out.println("Entering map: " + map);
                 if (map.equals("planes")){
                     VH.sbg.enterState(10);
+                }
+                for (String a : chars.split(";")){
+                    VH.arena.characters.add(Character.valueOf(a.toUpperCase()));
                 }
             }
         } catch (IOException e) {
@@ -73,12 +77,20 @@ public class NetworkManager {
                                 continue;
                             }
                             oos.writeBoolean(true);
+                            String chars = ch;
+                            for (Character c : VH.arena.characters){
+                                if (c.getKey().equals(ch)){
+                                    continue;
+                                }
+                                chars += ";" + c.getKey();
+                            }
+                            oos.writeObject(chars);
                             oos.writeObject(VH.mapName);
                             outs.add(oos);
                             ins.add(ois);
                             VH.arena.characters.add(Character.valueOf(ch.toUpperCase()));
                             Character.valueOf(ch.toUpperCase()).setIP(String.valueOf(s.getInetAddress()));
-                            System.out.println(s.getInetAddress() + " has successfully connected to the game.");
+                            System.out.println(s.getInetAddress() + " has successfully connected to the game as the " + ch + ".");
                             Character.valueOf(ch.toUpperCase()).setX(-25);
                             Character.valueOf(ch.toUpperCase()).setY(0);
                         } catch (IOException e) {

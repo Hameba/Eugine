@@ -25,7 +25,7 @@ public enum Character {
     private String IP = null;
     private int imageInt = 0;
 
-    private int ammo = 15;
+    protected int ammo = 15;
 
     private int lives = 3;
     private Character lastDamageSource = null;
@@ -67,7 +67,7 @@ public enum Character {
             return melee2;
         }
         if (imageInt==5){
-            return melee1.getFlippedCopy(true, false);
+            return melee2.getFlippedCopy(true, false);
         }
         if (imageInt==6){
             return melee3;
