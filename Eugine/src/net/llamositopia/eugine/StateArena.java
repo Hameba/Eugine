@@ -197,51 +197,53 @@ public abstract class StateArena extends BasicGameState{
     protected abstract ArrayList<Floor> getFloors();
 
     private synchronized void runServerInputStuff() {
-        for (ObjectInputStream ois : NetworkManager.ins){
-            try {
-                String inData = (String) ois.readObject();
-                System.out.println(inData);
-                String[] dataRaw = inData.split(";");
-                Character c = Character.valueOf(dataRaw[0].toUpperCase());
-                for (int i = 0; i < dataRaw.length; i++) {
-                    if (c.deadFrames!=-1){break;}
-                    if (i==0) continue;
-                    if (dataRaw[i].equals("<")){
-                        if (c.frames==-1){
-                            c.setIsFacingLeft(true);
-                            c.setImageInt(1);
+        synchronized (NetworkManager.ins){
+            for (ObjectInputStream ois : NetworkManager.ins){
+                try {
+                    String inData = (String) ois.readObject();
+                    System.out.println(inData);
+                    String[] dataRaw = inData.split(";");
+                    Character c = Character.valueOf(dataRaw[0].toUpperCase());
+                    for (int i = 0; i < dataRaw.length; i++) {
+                        if (c.deadFrames!=-1){break;}
+                        if (i==0) continue;
+                        if (dataRaw[i].equals("<")){
+                            if (c.frames==-1){
+                                c.setIsFacingLeft(true);
+                                c.setImageInt(1);
+                            }
+                            c.setX(c.getX()-2);
                         }
-                        c.setX(c.getX()-2);
-                    }
-                    if (dataRaw[i].equals("^")){
-                        if (c.risingFrames==-1){
-                            c.risingFrames=0;
+                        if (dataRaw[i].equals("^")){
+                            if (c.risingFrames==-1){
+                                c.risingFrames=0;
+                            }
+                        }
+                        if (dataRaw[i].equals(">")){
+                            if (c.frames==-1){
+                                c.setIsFacingLeft(false);
+                                c.setImageInt(0);
+                            }
+                            c.setX(c.getX()+2);
+                        }
+                        if (dataRaw[i].equals("z")){
+                            if (c.getImageInt()==1 || c.getImageInt()==0){
+                                c.setImageInt(c.getImageInt()+2);
+                                c.frames++;
+                            }
+                        }
+                        if (dataRaw[i].equals("x")){
+                            if (c.ammo>0){
+                                c.getProjectiles().add(new Projectile(c.isFacingLeft() ? c.getX() + 25 : c.getX() + 57, c.getY() + c.getImage().getHeight() / 2, c, c.isFacingLeft()));
+                                c.ammo--;
+                            }
                         }
                     }
-                    if (dataRaw[i].equals(">")){
-                        if (c.frames==-1){
-                            c.setIsFacingLeft(false);
-                            c.setImageInt(0);
-                        }
-                        c.setX(c.getX()+2);
-                    }
-                    if (dataRaw[i].equals("z")){
-                        if (c.getImageInt()==1 || c.getImageInt()==0){
-                            c.setImageInt(c.getImageInt()+2);
-                            c.frames++;
-                        }
-                    }
-                    if (dataRaw[i].equals("x")){
-                        if (c.ammo>0){
-                            c.getProjectiles().add(new Projectile(c.isFacingLeft() ? c.getX() + 25 : c.getX() + 57, c.getY() + c.getImage().getHeight() / 2, c, c.isFacingLeft()));
-                            c.ammo--;
-                        }
-                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
             }
         }
     }
