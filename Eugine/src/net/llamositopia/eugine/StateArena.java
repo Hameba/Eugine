@@ -30,7 +30,22 @@ public abstract class StateArena extends BasicGameState{
         bg = getBackground();
     }
 
-    public abstract Image getBackground() throws SlickException;
+    public Image getBackground() throws SlickException{
+        Image i = new Image("res/img/" + getArenaKey() + "/background.png");
+        Floor.clearFloors();
+        for (int x = 0; x < i.getWidth(); x++) {
+            for (int y = 0; y < i.getHeight(); y++) {
+                if (x%8==0 && y%8==0){
+                    if (i.getColor(x, y).equals(new Color(0xff00ff))){
+                        new Floor(x, y);
+                    }
+                }
+            }
+        }
+        return i;
+    }
+
+    protected abstract String getArenaKey();
 
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         if (bg!=null){
@@ -46,7 +61,7 @@ public abstract class StateArena extends BasicGameState{
             graphics.setColor(Color.white);
             graphics.drawString("Health: " + c.getHealth() + "\nLives: " + c.lives, c.getX()+c.getImage().getWidth()/2-graphics.getFont().getWidth("Health: " + c.getHealth() + "\nLives: " + c.lives)/2, c.getY()-graphics.getFont().getHeight("Health: " + c.getHealth() + "\nLives: " + c.lives));
         }
-        for (Floor a : getFloors()){
+        for (Floor a : Floor.getFloors()){
             graphics.drawImage(floorImage, a.getX(), a.getY());
         }
     }
@@ -111,9 +126,33 @@ public abstract class StateArena extends BasicGameState{
                     i.remove();
                 }
                 if (p.getLeft()){
-                    p.setX(p.getX() - 12);
+                    for (int j = 0; j < 12; j++) {
+                        for (Floor a : Floor.getFloors()){
+                            if (p.getY()<a.getY()+8){
+                                if (p.getY()+p.getImage().getHeight()>a.getY()){
+                                    if (p.getX()==a.getX()+8){
+                                        i.remove();
+                                        break;
+                                    }
+                                    p.setX(p.getX()-1);
+                                }
+                            }
+                        }
+                    }
                 }else{
-                    p.setX(p.getX() + 12);
+                    for (int j = 0; j < 12; j++) {
+                        for (Floor a : Floor.getFloors()){
+                            if (p.getY()<a.getY()+8){
+                                if (p.getY()+p.getImage().getHeight()>a.getY()){
+                                    if (p.getX()+p.getImage().getWidth()==a.getX()){
+                                        i.remove();
+                                        break;
+                                    }
+                                    p.setX(p.getX()+1);
+                                }
+                            }
+                        }
+                    }
                 }
             }
             if (c.deadFrames!=-1){
@@ -134,7 +173,7 @@ public abstract class StateArena extends BasicGameState{
                 boolean notUp = false;
                 if (c.risingFrames < 12) {
                     for (int i = 0; i < 16; i++) {
-                        for (Floor a : getFloors()) {
+                        for (Floor a : Floor.getFloors()) {
                             if (c.getY() == a.getY() + 8) {
                                 if (c.getX() + 57 < a.getX()) {
                                     continue;
@@ -224,8 +263,6 @@ public abstract class StateArena extends BasicGameState{
         }
     }
 
-    protected abstract ArrayList<Floor> getFloors();
-
     private synchronized void runServerInputStuff() {
         for (Iterator<ObjectInputStream> j = NetworkManager.ins.iterator();j.hasNext();){
             ObjectInputStream ois = j.next();
@@ -243,7 +280,7 @@ public abstract class StateArena extends BasicGameState{
                             c.setImageInt(1);
                         }
                         boolean notMoving = false;
-                        for (Floor a : getFloors()){
+                        for (Floor a : Floor.getFloors()){
                             if (c.getY()<a.getY()+8 && c.getY()+32>a.getY()){
                                 if (a.getX()+8==c.getX()+25){
                                     notMoving = true;
@@ -265,7 +302,7 @@ public abstract class StateArena extends BasicGameState{
                             c.setImageInt(0);
                         }
                         boolean notMoving = false;
-                        for (Floor a : getFloors()){
+                        for (Floor a : Floor.getFloors()){
                             if (c.getY()<a.getY()+8 && c.getY()+32>a.getY()){
                                 if (a.getX()==c.getX()+57){
                                     notMoving = true;

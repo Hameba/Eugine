@@ -20,6 +20,10 @@ public class Floor {
         floors.add(this);
     }
 
+    public static ArrayList<Floor> getFloors() {
+        return floors;
+    }
+
     public int getY() {
         return y;
     }

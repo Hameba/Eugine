@@ -18,11 +18,8 @@ public class StateArenaPlanes extends StateArena {
         return new Image("res/img/background.png");
     }
 
-    protected ArrayList<Floor> getFloors() {
-        ArrayList<Floor> floors = new ArrayList<Floor>();
-        floors.add(new Floor(128, 584));
-        floors.add(new Floor(136, 584));
-        floors.add(new Floor(144, 584));
-        return floors;
+    protected String getArenaKey() {
+        return "planes";
     }
+
 }
