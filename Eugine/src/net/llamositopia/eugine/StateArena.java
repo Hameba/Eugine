@@ -122,6 +122,7 @@ public abstract class StateArena extends BasicGameState{
                     c.lives--;
                     if (c.lives>0){
                         c.deadFrames=-1;
+                        c.ammo = 15;
                         c.setHealth(c.getMaxHealth());
                     }
                 }
