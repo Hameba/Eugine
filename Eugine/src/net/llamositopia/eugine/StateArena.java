@@ -89,7 +89,7 @@ public abstract class StateArena extends BasicGameState{
             c.setY(Integer.parseInt(charData[2]));
             c.setImageInt(Integer.parseInt(charData[3]));
             c.setHealth(Integer.parseInt(charData[4]));
-            c.setHealth(Integer.parseInt(charData[5]));
+            c.lives = Integer.parseInt(charData[5]);
             synchronized (c.getProjectiles()){
                 c.getProjectiles().clear();
                 for (int j = 0; j < charData.length; j++) {
