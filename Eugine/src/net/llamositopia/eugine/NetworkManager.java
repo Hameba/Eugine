@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class NetworkManager {
 
@@ -15,8 +16,8 @@ public class NetworkManager {
     private static ServerSocket ss;
 
     private static boolean isServer = false;
-    protected static final ArrayList<ObjectOutputStream> outs = new ArrayList<ObjectOutputStream>();
-    protected static final ArrayList<ObjectInputStream> ins = new ArrayList<ObjectInputStream>();
+    protected static final CopyOnWriteArrayList<ObjectOutputStream> outs = new CopyOnWriteArrayList<ObjectOutputStream>();
+    protected static final CopyOnWriteArrayList<ObjectInputStream> ins = new CopyOnWriteArrayList<ObjectInputStream>();
 
     public static void connect(String ip){
         try {
