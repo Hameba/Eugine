@@ -29,7 +29,7 @@ public enum Character {
 
     protected int ammo = 15;
 
-    public int lives = 3;
+    public int lives = 5;
     private Character lastDamageSource = null;
     public boolean prIsMovingLeft;
     private boolean prIsMoving = false;
