@@ -88,10 +88,12 @@ public abstract class StateArena extends BasicGameState{
             c.setX(Integer.parseInt(charData[1]));
             c.setY(Integer.parseInt(charData[2]));
             c.setImageInt(Integer.parseInt(charData[3]));
+            c.setHealth(Integer.parseInt(charData[4]));
+            c.setHealth(Integer.parseInt(charData[5]));
             synchronized (c.getProjectiles()){
                 c.getProjectiles().clear();
                 for (int j = 0; j < charData.length; j++) {
-                    if (j<4){
+                    if (j<6){
                         continue;
                     }
                     c.getProjectiles().add(new Projectile(Integer.parseInt(charData[j]), Integer.parseInt(charData[j+1]), c, false));
@@ -302,7 +304,9 @@ public abstract class StateArena extends BasicGameState{
             data += data.equals("") ? "" + c.getKey() : ";" + c.getKey();
             data += ":" + c.getX() + ":";
             data += c.getY() + ":";
-            data += c.getImageInt();
+            data += c.getImageInt() + ":";
+            data += c.getHealth() + ":";
+            data += c.lives;
             for (Iterator<Projectile> i = c.getProjectiles().iterator();i.hasNext();){
                 Projectile p = i.next();
                 data += ":" + p.getX() + ":" + p.getY();
