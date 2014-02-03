@@ -43,6 +43,8 @@ public abstract class StateArena extends BasicGameState{
                 graphics.drawImage(p.getImage(), p.getX(), p.getY());
             }
             graphics.drawImage(c.getImage(), c.getX(), c.getY());
+            graphics.setColor(Color.white);
+            graphics.drawString("Health: " + c.getHealth() + "\nLives: " + c.lives, c.getX()+c.getImage().getWidth()/2-graphics.getFont().getWidth("Health: " + c.getHealth() + "\nLives: " + c.lives), c.getY()-graphics.getFont().getHeight("Health: " + c.getHealth() + "\nLives: " + c.lives));
         }
         for (Floor a : getFloors()){
             graphics.drawImage(floorImage, a.getX(), a.getY());
@@ -107,9 +109,9 @@ public abstract class StateArena extends BasicGameState{
                     i.remove();
                 }
                 if (p.getLeft()){
-                    p.setX(p.getX() - 6);
+                    p.setX(p.getX() - 12);
                 }else{
-                    p.setX(p.getX() + 6);
+                    p.setX(p.getX() + 12);
                 }
             }
             if (c.deadFrames!=-1){
@@ -185,7 +187,7 @@ public abstract class StateArena extends BasicGameState{
             if (c.frames!=-1){
                 c.frames++;
             }
-            if (c.frames>5){
+            if (c.frames>2){
                 c.setImageInt(c.getImageInt()+2);
                 if (c.getImageInt()==8 || c.getImageInt()==9){
                     c.frames=-1;
