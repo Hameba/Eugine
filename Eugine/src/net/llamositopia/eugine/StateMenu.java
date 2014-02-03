@@ -34,7 +34,6 @@ public class StateMenu extends BasicGameState {
         }
         if (gc.getInput().isKeyDown(Input.KEY_LCONTROL) && gc.getInput().isKeyDown(Input.KEY_LALT) && gc.getInput().isKeyDown(Input.KEY_F8)){
             NetworkManager.startServer();
-            sbg.enterState(10);
         }
         if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)){
             if (gc.getInput().getMouseX()>gc.getWidth()/2-play.getWidth()/2 && gc.getInput().getMouseX()<gc.getWidth()/2+play.getWidth()/2 && gc.getInput().getMouseY()>gc.getHeight()/2-play.getHeight()/2 && gc.getInput().getMouseY()>gc.getHeight()/2+play.getHeight()/2){

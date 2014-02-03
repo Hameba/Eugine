@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class NetworkManager {
@@ -30,8 +31,14 @@ public class NetworkManager {
                 String chars = (String) ois.readObject();
                 String map = (String) ois.readObject();
                 System.out.println("Entering map: " + map);
-                if (map.equals("planes")){
+                if (map.equals("plains")){
                     VH.sbg.enterState(10);
+                }
+                if (map.equals("factory")){
+                    VH.sbg.enterState(11);
+                }
+                if (map.equals("battlezone")){
+                    VH.sbg.enterState(12);
                 }
                 for (String a : chars.split(";")){
                     VH.arena.characters.add(Character.valueOf(a.toUpperCase()));
@@ -52,7 +59,17 @@ public class NetworkManager {
         try {
             isServer = true;
             ss = new ServerSocket(21499);
-            VH.mapName = "planes";
+            int map = new Random().nextInt(3);
+            if (map==0){
+                VH.mapName = "plains";
+                VH.sbg.enterState(10);
+            }else if (map==1){
+                VH.mapName = "factory";
+                VH.sbg.enterState(11);
+            }else{
+                VH.mapName = "battlezone";
+                VH.sbg.enterState(12);
+            }
             new Thread(new Runnable() {
                 public void run() {
                     while (true) {
