@@ -8,7 +8,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import java.util.ArrayList;
 
-public class StateArenaPlanes extends StateArena {
+public class StateArenaPlains extends StateArena {
 
     public int getArenaID() {
         return 0;
@@ -19,7 +19,7 @@ public class StateArenaPlanes extends StateArena {
     }
 
     protected String getArenaKey() {
-        return "planes";
+        return "plains";
     }
 
 }
