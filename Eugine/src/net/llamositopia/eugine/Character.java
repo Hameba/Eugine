@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public enum Character {
 
     MAGE("mage", 10, 20, 80),
-    NINJA("ninja", 15, 10, 90),
-    BRUISER("bruiser", 20, 10, 100),
+    NINJA("ninja", 15, 10, 95),
+    BRUISER("bruiser", 20, 10, 90),
     ARCHER("archer", 10, 15, 85),
     ;
 
