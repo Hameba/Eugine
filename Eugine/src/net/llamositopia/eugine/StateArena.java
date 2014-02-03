@@ -44,7 +44,7 @@ public abstract class StateArena extends BasicGameState{
             }
             graphics.drawImage(c.getImage(), c.getX(), c.getY());
             graphics.setColor(Color.white);
-            graphics.drawString("Health: " + c.getHealth() + "\nLives: " + c.lives, c.getX()+c.getImage().getWidth()/2-graphics.getFont().getWidth("Health: " + c.getHealth() + "\nLives: " + c.lives), c.getY()-graphics.getFont().getHeight("Health: " + c.getHealth() + "\nLives: " + c.lives));
+            graphics.drawString("Health: " + c.getHealth() + "\nLives: " + c.lives, c.getX()+c.getImage().getWidth()/2-graphics.getFont().getWidth("Health: " + c.getHealth() + "\nLives: " + c.lives)/2, c.getY()-graphics.getFont().getHeight("Health: " + c.getHealth() + "\nLives: " + c.lives));
         }
         for (Floor a : getFloors()){
             graphics.drawImage(floorImage, a.getX(), a.getY());
