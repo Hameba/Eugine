@@ -14,10 +14,6 @@ public class StateArenaPlains extends StateArena {
         return 0;
     }
 
-    public Image getBackground() throws SlickException {
-        return new Image("res/img/background.png");
-    }
-
     protected String getArenaKey() {
         return "plains";
     }

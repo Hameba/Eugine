@@ -26,6 +26,9 @@ public abstract class StateArena extends BasicGameState{
 
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         floorImage = new Image("res/img/floor.png");
+    }
+
+    public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException {
         VH.arena = this;
         bg = getBackground();
     }
