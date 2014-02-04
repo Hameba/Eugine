@@ -33,12 +33,15 @@ public class NetworkManager {
                 System.out.println("Entering map: " + map);
                 if (map.equals("plains")){
                     VH.sbg.enterState(10);
+                    VH.arena = (StateArena) VH.sbg.getState(10);
                 }
                 if (map.equals("factory")){
                     VH.sbg.enterState(11);
+                    VH.arena = (StateArena) VH.sbg.getState(11);
                 }
                 if (map.equals("battlezone")){
                     VH.sbg.enterState(12);
+                    VH.arena = (StateArena) VH.sbg.getState(12);
                 }
                 for (String a : chars.split(";")){
                     VH.arena.characters.add(Character.valueOf(a.toUpperCase()));

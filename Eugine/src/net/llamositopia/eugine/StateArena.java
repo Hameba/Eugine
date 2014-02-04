@@ -12,6 +12,8 @@ import java.util.Iterator;
 
 public abstract class StateArena extends BasicGameState{
 
+    private boolean initialized = false;
+
     public final int getID() {
         return getArenaID()+10;
     }
@@ -31,6 +33,7 @@ public abstract class StateArena extends BasicGameState{
     public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException {
         VH.arena = this;
         bg = getBackground();
+        initialized = true;
     }
 
     public Image getBackground() throws SlickException{
@@ -51,6 +54,9 @@ public abstract class StateArena extends BasicGameState{
     protected abstract String getArenaKey();
 
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
+        if (!initialized){
+            return;
+        }
         if (bg!=null){
             graphics.drawImage(bg, 0, 0);
         }
@@ -70,6 +76,9 @@ public abstract class StateArena extends BasicGameState{
     }
 
     public void update(GameContainer gc, StateBasedGame stateBasedGame, int i) throws SlickException {
+        if (!initialized){
+            return;
+        }
         if (NetworkManager.isServer()){
             runServerInputStuff();
             runServerLogicStuff();
@@ -248,16 +257,24 @@ public abstract class StateArena extends BasicGameState{
             }
             if (c.deadFrames==-1){
                 if (c.getX()<-25){
-                    c.setX(-25);
+                    c.deadFrames = 0;
+                    c.setHealth(c.getMaxHealth());
+                    c.setX(-24);
                 }
                 if (c.getX()>743){
-                    c.setX(743);
+                    c.deadFrames = 0;
+                    c.setHealth(c.getMaxHealth());
+                    c.setX(742);
                 }
                 if (c.getY()<0){
-                    c.setY(0);
+                    c.deadFrames = 0;
+                    c.setHealth(c.getMaxHealth());
+                    c.setY(1);
                 }
                 if (c.getY()>568){
-                    c.setY(568);
+                    c.deadFrames = 0;
+                    c.setHealth(c.getMaxHealth());
+                    c.setY(567);
                 }
             }else{
                 c.setX(-82);
