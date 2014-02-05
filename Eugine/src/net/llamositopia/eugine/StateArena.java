@@ -138,48 +138,73 @@ public abstract class StateArena extends BasicGameState{
                     i.remove();
                 }
                 if (p.getLeft()){
-                    for (int j = 0; j < 12; j++) {
+                    loop: for (int j = 0; j < 6; j++) {
                         for (Floor a : Floor.getFloors()){
                             if (p.getY()<a.getY()+8){
                                 if (p.getY()+p.getImage().getHeight()>a.getY()){
                                     if (p.getX()==a.getX()+8){
                                         i.remove();
-                                        break;
+                                        break loop;
                                     }
-                                    p.setX(p.getX()-1);
                                 }
                             }
                         }
+                        p.setX(p.getX()-1);
                     }
                 }else{
-                    for (int j = 0; j < 12; j++) {
+                    loop: for (int j = 0; j < 6; j++) {
                         for (Floor a : Floor.getFloors()){
                             if (p.getY()<a.getY()+8){
                                 if (p.getY()+p.getImage().getHeight()>a.getY()){
                                     if (p.getX()+p.getImage().getWidth()==a.getX()){
                                         i.remove();
-                                        break;
+                                        break loop;
                                     }
-                                    p.setX(p.getX()+1);
                                 }
                             }
                         }
+                        p.setX(p.getX()+1);
                     }
                 }
             }
             if (c.deadFrames!=-1){
                 c.deadFrames++;
+                c.setX(-100);
+                c.setY(-100);
                 if (c.deadFrames>=90){
                     c.lives--;
                     if (c.lives>0){
                         c.deadFrames=-1;
                         c.ammo = 15;
                         c.setHealth(c.getMaxHealth());
+                        c.setX(-25);
+                        c.setY(0);
+                        c.risingFrames = -1;
+                        c.frames = -1;
                     }
                 }
-                c.setX(-100);
-                c.setY(-100);
                 continue;
+            }else{
+                if (c.getX()<-25){
+                    c.deadFrames = 0;
+                    c.setHealth(c.getMaxHealth());
+                    c.setX(-25);
+                }
+                if (c.getX()>743){
+                    c.deadFrames = 0;
+                    c.setHealth(c.getMaxHealth());
+                    c.setX(743);
+                }
+                if (c.getY()<0){
+                    c.deadFrames = 0;
+                    c.setHealth(c.getMaxHealth());
+                    c.setY(0);
+                }
+                if (c.getY()>567){
+                    c.deadFrames = 0;
+                    c.setHealth(c.getMaxHealth());
+                    c.setY(567);
+                }
             }
             if (c.risingFrames!=-1) {
                 boolean notUp = false;
@@ -254,31 +279,6 @@ public abstract class StateArena extends BasicGameState{
                 if (!Floor.isOnFloor(c)){
                     c.setY(c.getY()+1);
                 }
-            }
-            if (c.deadFrames==-1){
-                if (c.getX()<-25){
-                    c.deadFrames = 0;
-                    c.setHealth(c.getMaxHealth());
-                    c.setX(-24);
-                }
-                if (c.getX()>743){
-                    c.deadFrames = 0;
-                    c.setHealth(c.getMaxHealth());
-                    c.setX(742);
-                }
-                if (c.getY()<0){
-                    c.deadFrames = 0;
-                    c.setHealth(c.getMaxHealth());
-                    c.setY(1);
-                }
-                if (c.getY()>568){
-                    c.deadFrames = 0;
-                    c.setHealth(c.getMaxHealth());
-                    c.setY(567);
-                }
-            }else{
-                c.setX(-82);
-                c.setY(-32);
             }
         }
     }

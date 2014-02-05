@@ -116,6 +116,8 @@ public class NetworkManager {
                             System.out.println(s.getInetAddress() + " has successfully connected to the game as the " + ch + ".");
                             Character.valueOf(ch.toUpperCase()).setX(-25);
                             Character.valueOf(ch.toUpperCase()).setY(0);
+                            Character.valueOf(ch.toUpperCase()).risingFrames = -1;
+                            Character.valueOf(ch.toUpperCase()).frames = -1;
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (ClassNotFoundException e) {
