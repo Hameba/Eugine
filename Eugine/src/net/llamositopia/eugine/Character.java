@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 public enum Character {
 
-    MAGE("mage", 10, 20, 80),
+    MAGE("mage", 10, 20, 60),
     NINJA("ninja", 15, 10, 95),
     BRUISER("bruiser", 20, 10, 90),
-    ARCHER("archer", 10, 15, 85),
+    ARCHER("archer", 10, 15, 80),
     ;
 
     private Image rest, melee1, melee2, melee3, pr;
