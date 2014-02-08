@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="EugineMapCreator">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/EugineMapCreator/slick.jar!/" />
+      <root url="jar://$PROJECT_DIR$/EugineMapCreator/lwjgl.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
