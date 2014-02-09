@@ -43,6 +43,10 @@ public class NetworkManager {
                     VH.sbg.enterState(12);
                     VH.arena = (StateArena) VH.sbg.getState(12);
                 }
+                if (map.equals("lumberyard")){
+                    VH.sbg.enterState(13);
+                    VH.arena = (StateArena) VH.sbg.getState(13);
+                }
                 for (String a : chars.split(";")){
                     VH.arena.characters.add(Character.valueOf(a.toUpperCase()));
                 }
@@ -69,9 +73,12 @@ public class NetworkManager {
             }else if (map==1){
                 VH.mapName = "factory";
                 VH.sbg.enterState(11);
-            }else{
+            }else if (map==2){
                 VH.mapName = "battlezone";
                 VH.sbg.enterState(12);
+            }else{
+                VH.mapName = "lumberyard";
+                VH.sbg.enterState(13);
             }
             new Thread(new Runnable() {
                 public void run() {
