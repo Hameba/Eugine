@@ -7,7 +7,7 @@
       <root url="jar://$PROJECT_DIR$/Eugine/jinput.jar!/" />
       <root url="jar://$PROJECT_DIR$/Eugine/jogg-0.0.7.jar!/" />
       <root url="jar://$PROJECT_DIR$/Eugine/slick.jar!/" />
-      <root url="jar://$PROJECT_DIR$/Eugine/255-0-255-To-Transparent.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Eugine/res/img/char/255-0-255-To-Transparent.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

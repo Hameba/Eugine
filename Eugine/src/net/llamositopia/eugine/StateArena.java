@@ -26,8 +26,11 @@ public abstract class StateArena extends BasicGameState{
 
     protected Image bg;
 
+    public static ArrayList<StateArena> arenas = new ArrayList<StateArena>();
+
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         floorImage = new Image("res/img/floor.png");
+        arenas.add(this);
     }
 
     public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException {
