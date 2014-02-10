@@ -27,7 +27,7 @@ public class StatePlayerChoose extends BasicGameState {
         g.setColor(Color.white);
         for (int i = 0; i < Character.values().length; i++) {
             Character c  = Character.values()[i];
-            g.drawImage(c.getImage(), gc.getWidth()/Character.values().length*i, 300);
+            g.drawImage(c.getImage(), gc.getWidth()/Character.values().length*i, i%2==0 ? 268 : 332);
         }
         g.setLineWidth(5);
         g.drawRect(gc.getWidth()/Character.values().length*selected+25, 300, 32, 32);
