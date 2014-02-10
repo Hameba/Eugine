@@ -186,18 +186,12 @@ public abstract class StateArena extends BasicGameState{
                 continue;
             }else{
                 if (c.getX()<-25){
-                    c.deadFrames = 0;
-                    c.setHealth(c.getMaxHealth());
                     c.setX(-25);
                 }
                 if (c.getX()>743){
-                    c.deadFrames = 0;
-                    c.setHealth(c.getMaxHealth());
                     c.setX(743);
                 }
                 if (c.getY()<0){
-                    c.deadFrames = 0;
-                    c.setHealth(c.getMaxHealth());
                     c.setY(0);
                 }
                 if (c.getY()>567){
