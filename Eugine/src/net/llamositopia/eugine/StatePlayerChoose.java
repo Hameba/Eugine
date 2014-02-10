@@ -27,10 +27,10 @@ public class StatePlayerChoose extends BasicGameState {
         g.setColor(Color.white);
         for (int i = 0; i < Character.values().length; i++) {
             Character c  = Character.values()[i];
-            g.drawImage(c.getImage(), gc.getWidth()/Character.values().length*i, i%2==0 ? 268 : 332);
+            g.drawImage(c.getImage(), gc.getWidth()/Character.values().length*2*(i/2), i%2==0 ? 268 : 332);
         }
         g.setLineWidth(5);
-        g.drawRect(gc.getWidth()/Character.values().length*selected+25, 300, 32, 32);
+        g.drawRect(gc.getWidth()/Character.values().length*selected+25+(selected%2==1 ? -114 : 0), 268 + (selected%2==1 ? 64 : 0), 32, 32);
         g.drawImage(quit, gc.getWidth()/2-quit.getWidth()/2, gc.getHeight()/2+quit.getHeight()/2+gc.getHeight()/3);
     }
 
@@ -38,10 +38,16 @@ public class StatePlayerChoose extends BasicGameState {
         if (gc.getInput().isKeyPressed(Input.KEY_F11)){
             gc.setFullscreen(!gc.isFullscreen());
         }
-        if (gc.getInput().isKeyPressed(Input.KEY_LEFT) && selected>0){
+        if (gc.getInput().isKeyPressed(Input.KEY_LEFT) && selected>1){
+            selected-=2;
+        }
+        if (gc.getInput().isKeyPressed(Input.KEY_RIGHT) && selected<Character.values().length-2){
+            selected+=2;
+        }
+        if (gc.getInput().isKeyPressed(Input.KEY_UP) && selected%2==1){
             selected--;
         }
-        if (gc.getInput().isKeyPressed(Input.KEY_RIGHT) && selected<Character.values().length-1){
+        if (gc.getInput().isKeyPressed(Input.KEY_DOWN) && selected%2==0 && selected<Character.values().length-1){
             selected++;
         }
         if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)){
