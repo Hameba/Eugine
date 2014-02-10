@@ -31,21 +31,12 @@ public class NetworkManager {
                 String chars = (String) ois.readObject();
                 String map = (String) ois.readObject();
                 System.out.println("Entering map: " + map);
-                if (map.equals("plains")){
-                    VH.sbg.enterState(10);
-                    VH.arena = (StateArena) VH.sbg.getState(10);
-                }
-                if (map.equals("factory")){
-                    VH.sbg.enterState(11);
-                    VH.arena = (StateArena) VH.sbg.getState(11);
-                }
-                if (map.equals("battlezone")){
-                    VH.sbg.enterState(12);
-                    VH.arena = (StateArena) VH.sbg.getState(12);
-                }
-                if (map.equals("lumberyard")){
-                    VH.sbg.enterState(13);
-                    VH.arena = (StateArena) VH.sbg.getState(13);
+                for (StateArena b : StateArena.arenas){
+                    if (b.getArenaKey().equalsIgnoreCase(map)){
+                        VH.sbg.enterState(b.getID());
+                        VH.arena = (StateArena) VH.sbg.getState(b.getID());
+                        break;
+                    }
                 }
                 for (String a : chars.split(";")){
                     VH.arena.characters.add(Character.valueOf(a.toUpperCase()));
@@ -66,20 +57,9 @@ public class NetworkManager {
         try {
             isServer = true;
             ss = new ServerSocket(21499);
-            int map = new Random().nextInt(4);
-            if (map==0){
-                VH.mapName = "plains";
-                VH.sbg.enterState(10);
-            }else if (map==1){
-                VH.mapName = "factory";
-                VH.sbg.enterState(11);
-            }else if (map==2){
-                VH.mapName = "battlezone";
-                VH.sbg.enterState(12);
-            }else{
-                VH.mapName = "lumberyard";
-                VH.sbg.enterState(13);
-            }
+            int map = new Random().nextInt(StateArena.arenas.size());
+            VH.sbg.enterState(map+10);
+            VH.mapName = ((StateArena)VH.sbg.getState(map+10)).getArenaKey();
             new Thread(new Runnable() {
                 public void run() {
                     while (true) {
