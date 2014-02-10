@@ -12,6 +12,8 @@ public enum Character {
     NINJA("ninja", 15, 10, 95),
     BRUISER("bruiser", 20, 10, 90),
     ARCHER("archer", 10, 15, 80),
+    GENIE("genie", 10, 10, 110),
+    BRAINIAC("brainiac", 25, 25, 45),
     ;
 
     private Image rest, melee1, melee2, melee3, pr;

@@ -66,7 +66,7 @@ public class NetworkManager {
         try {
             isServer = true;
             ss = new ServerSocket(21499);
-            int map = new Random().nextInt(3);
+            int map = new Random().nextInt(4);
             if (map==0){
                 VH.mapName = "plains";
                 VH.sbg.enterState(10);

@@ -17,6 +17,7 @@ public class Game extends StateBasedGame {
         addState(new StateArenaPlains());
         addState(new StateArenaFactory());
         addState(new StateArenaBattlezone());
+        addState(new StateArenaLumberyard());
         enterState(0);
     }
 }

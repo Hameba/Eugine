@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Eugine:jar">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="archive" name="Eugine.jar">
+      <element id="module-output" name="Eugine" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Eugine/jorbis.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Eugine/jinput.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Eugine/lwjgl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Eugine/slick.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Eugine/mod_Dependances.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Eugine/jogg-0.0.7.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
