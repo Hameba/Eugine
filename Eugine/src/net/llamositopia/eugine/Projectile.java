@@ -6,10 +6,10 @@ public class Projectile {
 
     private int x;
     private int y;
-    private Character c;
+    private Squishy c;
     private boolean left;
 
-    public Projectile(int x, int y, Character c, boolean left){
+    public Projectile(int x, int y, Squishy c, boolean left){
         this.x = x;
         this.y = y;
         this.c = c;
@@ -32,7 +32,7 @@ public class Projectile {
         this.y = y;
     }
 
-    public Character getCharacter(){
+    public Squishy getSquishy(){
         return c;
     }
 

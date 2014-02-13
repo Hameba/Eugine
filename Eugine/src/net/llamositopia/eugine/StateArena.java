@@ -20,7 +20,7 @@ public abstract class StateArena extends BasicGameState{
 
     protected abstract int getArenaID();
 
-    protected ArrayList<Character> characters = new ArrayList<Character>();
+    protected ArrayList<Squishy> squishies = new ArrayList<Squishy>();
 
     private Image floorImage;
 
@@ -63,7 +63,7 @@ public abstract class StateArena extends BasicGameState{
         if (bg!=null){
             graphics.drawImage(bg, 0, 0);
         }
-        for (Character c : characters){
+        for (Squishy c : squishies){
             System.out.println(c.getX() + " " + c.getY());
             for (Iterator<Projectile> i = c.getProjectiles().iterator();i.hasNext();){
                 Projectile p = i.next();
@@ -111,9 +111,9 @@ public abstract class StateArena extends BasicGameState{
         for (String a : inData){
             System.out.println("Using " + a);
             String[] charData = a.split(":");
-            Character c = Character.valueOf(charData[0].toUpperCase());
-            if (!characters.contains(c)){
-                characters.add(c);
+            Squishy c = Squishy.valueOf(charData[0].toUpperCase());
+            if (!squishies.contains(c)){
+                squishies.add(c);
             }
             c.setX(Integer.parseInt(charData[1]));
             c.setY(Integer.parseInt(charData[2]));
@@ -134,7 +134,7 @@ public abstract class StateArena extends BasicGameState{
     }
 
     private void runServerLogicStuff() {
-        for (Character c : characters){
+        for (Squishy c : squishies){
             for (Iterator<Projectile> i = c.getProjectiles().iterator();i.hasNext();){
                 Projectile p = i.next();
                 if (p.getX()<0 || p.getX()>800){
@@ -231,7 +231,7 @@ public abstract class StateArena extends BasicGameState{
                     c.risingFrames = -1;
                 }
             }
-            for (Character c2 : characters){
+            for (Squishy c2 : squishies){
                 if (c.equals(c2)){
                     continue;
                 }
@@ -287,7 +287,7 @@ public abstract class StateArena extends BasicGameState{
                 String inData = (String) ois.readObject();
                 System.out.println(inData);
                 String[] dataRaw = inData.split(";");
-                Character c = Character.valueOf(dataRaw[0].toUpperCase());
+                Squishy c = Squishy.valueOf(dataRaw[0].toUpperCase());
                 for (int i = 0; i < dataRaw.length; i++) {
                     if (c.deadFrames!=-1){break;}
                     if (i==0) continue;
@@ -355,7 +355,7 @@ public abstract class StateArena extends BasicGameState{
 
     private void runServerOutputStuff() {
         String data = "";
-        for (Character c : characters){
+        for (Squishy c : squishies){
             data += data.equals("") ? "" + c.getKey() : ";" + c.getKey();
             data += ":" + c.getX() + ":";
             data += c.getY() + ":";

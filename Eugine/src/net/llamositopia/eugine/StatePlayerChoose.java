@@ -25,12 +25,12 @@ public class StatePlayerChoose extends BasicGameState {
         g.drawImage(bg, 0, 0);
         g.drawImage(play, gc.getWidth() / 2 - play.getWidth() / 2, gc.getHeight() / 2 + play.getHeight() / 2 + gc.getHeight() / 5);
         g.setColor(Color.white);
-        for (int i = 0; i < Character.values().length; i++) {
-            Character c  = Character.values()[i];
-            g.drawImage(c.getImage(), gc.getWidth()/Character.values().length*2*(i/2), i%2==0 ? 268 : 332);
+            for (int i = 0; i < Squishy.values().length; i++) {
+            Squishy c  = Squishy.values()[i];
+            g.drawImage(c.getImage(), gc.getWidth()/Squishy.values().length*2*(i/2), i%2==0 ? 268 : 332);
         }
         g.setLineWidth(5);
-        g.drawRect(gc.getWidth()/Character.values().length*selected+25+(selected%2==1 ? -114 : 0), 268 + (selected%2==1 ? 64 : 0), 32, 32);
+        g.drawRect(gc.getWidth()/Squishy.values().length*selected+25+(selected%2==1 ? -114 : 0), 268 + (selected%2==1 ? 64 : 0), 32, 32);
         g.drawImage(quit, gc.getWidth()/2-quit.getWidth()/2, gc.getHeight()/2+quit.getHeight()/2+gc.getHeight()/3);
     }
 
@@ -41,18 +41,18 @@ public class StatePlayerChoose extends BasicGameState {
         if (gc.getInput().isKeyPressed(Input.KEY_LEFT) && selected>1){
             selected-=2;
         }
-        if (gc.getInput().isKeyPressed(Input.KEY_RIGHT) && selected<Character.values().length-2){
+        if (gc.getInput().isKeyPressed(Input.KEY_RIGHT) && selected<Squishy.values().length-2){
             selected+=2;
         }
         if (gc.getInput().isKeyPressed(Input.KEY_UP) && selected%2==1){
             selected--;
         }
-        if (gc.getInput().isKeyPressed(Input.KEY_DOWN) && selected%2==0 && selected<Character.values().length-1){
+        if (gc.getInput().isKeyPressed(Input.KEY_DOWN) && selected%2==0 && selected<Squishy.values().length-1){
             selected++;
         }
         if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)){
             if (gc.getInput().getMouseX()>gc.getWidth()/2-play.getWidth()/2 && gc.getInput().getMouseX()<gc.getWidth()/2+play.getWidth()/2 && gc.getInput().getMouseY()>gc.getHeight()/2-play.getHeight()/2+gc.getHeight()/5 && gc.getInput().getMouseY()>gc.getHeight()/2+play.getHeight()/2+gc.getHeight()/5){
-                VH.myChar = Character.values()[selected];
+                VH.myChar = Squishy.values()[selected];
                 sbg.enterState(2);
             }
             if (gc.getInput().getMouseX()>gc.getWidth()/2-quit.getWidth()/2 && gc.getInput().getMouseX()<gc.getWidth()/2+quit.getWidth()/2 && gc.getInput().getMouseY()>gc.getHeight()/2-quit.getHeight()/2+gc.getHeight()/3 && gc.getInput().getMouseY()>gc.getHeight()/2+quit.getHeight()/2+gc.getHeight()/3){

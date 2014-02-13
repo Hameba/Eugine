@@ -17,7 +17,7 @@ public class StateMenu extends BasicGameState {
         bg = new Image("res/img/menu/background.png");
         play = new Image("res/img/menu/play.png");
         quit = new Image("res/img/menu/quit.png");
-        for (Character c : Character.values()){
+        for (Squishy c : Squishy.values()){
             System.out.println("Loaded " + c.getKey());
         }
     }

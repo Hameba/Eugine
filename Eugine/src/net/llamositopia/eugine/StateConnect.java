@@ -37,7 +37,7 @@ public class StateConnect extends BasicGameState {
         }
         if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)){
             if (gc.getInput().getMouseX()>gc.getWidth()/2-connect.getWidth()/2 && gc.getInput().getMouseX()<gc.getWidth()/2+connect.getWidth()/2 && gc.getInput().getMouseY()>gc.getHeight()/2-connect.getHeight()/2+gc.getHeight()/5 && gc.getInput().getMouseY()>gc.getHeight()/2+connect.getHeight()/2+gc.getHeight()/5){
-                for (Character c : Character.values()){
+                for (Squishy c : Squishy.values()){
                     c.setX(-100);
                     c.setY(-100);
                 }

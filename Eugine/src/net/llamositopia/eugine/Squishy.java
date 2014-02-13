@@ -6,16 +6,9 @@ import org.newdawn.slick.SpriteSheet;
 
 import java.util.ArrayList;
 
-public enum Character {
+public abstract class Squishy {
 
-    MAGE("mage", 10, 20, 60),
-    NINJA("ninja", 15, 10, 95),
-    BRUISER("bruiser", 20, 10, 90),
-    ARCHER("archer", 10, 15, 80),
-    GENIE("genie", 10, 10, 110),
-    BRAINIAC("brainiac", 25, 25, 45),
-    PENGUIN("penguin",  5, 25, 55),
-    ;
+    private static ArrayList<Squishy> squishies = new ArrayList<Squishy>();
 
     private Image rest, melee1, melee2, melee3, pr;
 
@@ -25,7 +18,7 @@ public enum Character {
     public boolean rising = false;
 
     private boolean isFacingLeft = false;
-    private final String key;
+    private String key;
 
     private String IP = null;
     private int imageInt = 0;
@@ -33,12 +26,12 @@ public enum Character {
     protected int ammo = 15;
 
     public int lives = 5;
-    private Character lastDamageSource = null;
+    private Squishy lastDamageSource = null;
     public boolean prIsMovingLeft;
     private boolean prIsMoving = false;
     private final ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
-    Character(String key, int meleeDamage, int rangedDamage, int maxHealth){
+    public Squishy(String key, int meleeDamage, int rangedDamage, int maxHealth){
         this.meleeDamage = meleeDamage;
         this.rangedDamage = rangedDamage;
         this.maxHealth = maxHealth;
@@ -54,6 +47,7 @@ public enum Character {
         } catch (SlickException e) {
             e.printStackTrace();
         }
+        squishies.add(this);
     }
 
     public Image getImage(){
@@ -144,12 +138,12 @@ public enum Character {
         return maxHealth;
     }
 
-    public void damage(int meleeDamage, Character source) {
+    public void damage(int meleeDamage, Squishy source) {
         this.health -= meleeDamage;
         this.lastDamageSource = source;
     }
 
-    public Character getLastDamageSource(){
+    public Squishy getLastDamageSource(){
         return lastDamageSource;
     }
 
@@ -172,4 +166,27 @@ public enum Character {
     public synchronized ArrayList<Projectile> getProjectiles() {
         return projectiles;
     }
+
+    public static Squishy[] values() {
+        return (Squishy[])squishies.toArray();
+    }
+
+    public static Squishy valueOf(String key){
+        key = key.toLowerCase();
+        Squishy c = null;
+        for (Squishy b : Squishy.values()){
+            if (b.getKey().equals(key)){
+                c = b;
+                break;
+            }
+        }
+        return null;
+    }
+
+    public abstract void usePrimaryAbility();
+
+    public abstract void useSecondaryAbility();
+
+    public abstract boolean isPrimaryActive();
+    public abstract boolean isSecondaryActive();
 }

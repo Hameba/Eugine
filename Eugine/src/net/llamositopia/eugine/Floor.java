@@ -32,7 +32,7 @@ public class Floor {
         return x;
     }
 
-    public static boolean isOnFloor(Character c){
+    public static boolean isOnFloor(Squishy c){
         for (Floor a : floors){
             if (c.getY()+32==a.getY()){
                 if (c.getX()+57<a.getX()){

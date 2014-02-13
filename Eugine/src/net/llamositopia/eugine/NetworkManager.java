@@ -39,7 +39,7 @@ public class NetworkManager {
                     }
                 }
                 for (String a : chars.split(";")){
-                    VH.arena.characters.add(Character.valueOf(a.toUpperCase()));
+                    VH.arena.squishies.add(Squishy.valueOf(a.toUpperCase()));
                 }
             }
         } catch (IOException e) {
@@ -71,7 +71,7 @@ public class NetworkManager {
                             ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
                             String ch = (String) ois.readObject();
                             boolean wrongChar = false;
-                            for (Character c : Character.values()){
+                            for (Squishy c : Squishy.values()){
                                 if (c.getKey().equals(ch)){
                                     if (c.getIP()!=null){
                                         wrongChar = true;
@@ -86,7 +86,7 @@ public class NetworkManager {
                             }
                             oos.writeBoolean(true);
                             String chars = ch;
-                            for (Character c : VH.arena.characters){
+                            for (Squishy c : VH.arena.squishies){
                                 if (c.getKey().equals(ch)){
                                     continue;
                                 }
@@ -98,13 +98,13 @@ public class NetworkManager {
                                 outs.add(oos);
                                 ins.add(ois);
                             }
-                            VH.arena.characters.add(Character.valueOf(ch.toUpperCase()));
-                            Character.valueOf(ch.toUpperCase()).setIP(String.valueOf(s.getInetAddress()));
+                            VH.arena.squishies.add(Squishy.valueOf(ch.toUpperCase()));
+                            Squishy.valueOf(ch.toUpperCase()).setIP(String.valueOf(s.getInetAddress()));
                             System.out.println(s.getInetAddress() + " has successfully connected to the game as the " + ch + ".");
-                            Character.valueOf(ch.toUpperCase()).setX(-25);
-                            Character.valueOf(ch.toUpperCase()).setY(0);
-                            Character.valueOf(ch.toUpperCase()).risingFrames = -1;
-                            Character.valueOf(ch.toUpperCase()).frames = -1;
+                            Squishy.valueOf(ch.toUpperCase()).setX(-25);
+                            Squishy.valueOf(ch.toUpperCase()).setY(0);
+                            Squishy.valueOf(ch.toUpperCase()).risingFrames = -1;
+                            Squishy.valueOf(ch.toUpperCase()).frames = -1;
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (ClassNotFoundException e) {
