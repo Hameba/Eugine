@@ -155,20 +155,27 @@ public abstract class Squishy {
         this.health = health;
     }
 
-    public void launchProjectile(boolean left){
-        if (left){
-
-        }else{
-
-        }
-    }
-
     public synchronized ArrayList<Projectile> getProjectiles() {
         return projectiles;
     }
 
     public static Squishy[] values() {
-        return (Squishy[])squishies.toArray();
+        try {
+            Class.forName("net.llamositopia.eugine.chars.SquishyArcher");
+            Class.forName("net.llamositopia.eugine.chars.SquishyBrainiac");
+            Class.forName("net.llamositopia.eugine.chars.SquishyBruiser");
+            Class.forName("net.llamositopia.eugine.chars.SquishyGenie");
+            Class.forName("net.llamositopia.eugine.chars.SquishyMage");
+            Class.forName("net.llamositopia.eugine.chars.SquishyNinja");
+            Class.forName("net.llamositopia.eugine.chars.SquishyPenguin");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        Squishy[] returnVal = new Squishy[squishies.size()];
+        for (int i = 0; i < squishies.size(); i++) {
+            returnVal[i] = squishies.get(i);
+        }
+        return returnVal;
     }
 
     public static Squishy valueOf(String key){
