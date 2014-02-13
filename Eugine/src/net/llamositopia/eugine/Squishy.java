@@ -187,7 +187,7 @@ public abstract class Squishy {
                 break;
             }
         }
-        return null;
+        return c;
     }
 
     public abstract void usePrimaryAbility();
