@@ -25,6 +25,7 @@ public class StateMapCreator extends BasicGameState {
 
     class Tile{
         int x, y;
+        int state = 0;
         Tile(int x, int y){
             this.x = x;
             this.y = y;
@@ -33,6 +34,25 @@ public class StateMapCreator extends BasicGameState {
         public boolean equals(Object obj) {
             return obj instanceof Tile && x == ((Tile) obj).x && y == ((Tile) obj).y;
         }
+
+        public int getState(){
+            return state;
+        }
+
+        public void toggleStateUp(){
+            state++;
+            if (state>7){
+                state = 0;
+            }
+        }
+
+        public void toggleStateDown(){
+            state--;
+            if (state<0){
+                state = 7;
+            }
+        }
+
     }
 
     ArrayList<Tile> tiles = new ArrayList<Tile>();
@@ -51,9 +71,8 @@ public class StateMapCreator extends BasicGameState {
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.drawImage(bg, 0, 0);
-        g.setColor(Color.decode("0xff00ff"));
         for (Tile a : tiles){
-            System.out.println(a.x + " " + a.y);
+            g.setColor(a.getState()==0 ? Color.green : a.getState()==1 ? Color.blue : a.getState()==2 ? Color.orange : a.getState()==3 ? Color.magenta : a.getState()==4 ? Color.gray : a.getState()==5 ? Color.red : a.getState()==6 ? Color.yellow : Color.pink);
             g.fillRect(a.x, a.y, 8, 8);
         }
         if (capturing!=-1){
@@ -71,12 +90,13 @@ public class StateMapCreator extends BasicGameState {
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-        if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
+        if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)){
             boolean found = false;
             for (Tile t : tiles){
                 if (t.x==roundDown(gc.getInput().getMouseX())){
-                    if (t.x==roundDown(gc.getInput().getMouseY())){
+                    if (t.y==roundDown(gc.getInput().getMouseY())){
                         found = true;
+                        t.toggleStateUp();
                         break;
                     }
                 }
