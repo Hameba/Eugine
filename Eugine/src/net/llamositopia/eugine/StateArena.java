@@ -251,7 +251,7 @@ public abstract class StateArena extends BasicGameState{
                 for (Iterator<Projectile> i = c.getProjectiles().iterator();i.hasNext();){
                     Projectile p = i.next();
                     if (p.getX()<c2.getX()+82 && p.getX()+c.getProjectile().getWidth()>c2.getX() && p.getY()<c2.getY()+32 && p.getY()+c.getProjectile().getHeight()>c2.getY()){
-                        c2.damage(c.getRangedDamage(), c);
+                        c2.damageRanged(c.getRangedDamage(), c);
                         i.remove();
                     }
                 }
@@ -305,7 +305,7 @@ public abstract class StateArena extends BasicGameState{
                             }
                         }
                         if (!notMoving){
-                            c.setX(c.getX()-4);
+                            c.setX(c.getX()-c.getSpeed());
                         }
                     }
                     if (dataRaw[i].equals("^")){
@@ -327,7 +327,7 @@ public abstract class StateArena extends BasicGameState{
                             }
                         }
                         if (!notMoving){
-                            c.setX(c.getX()+4);
+                            c.setX(c.getX()+c.getSpeed());
                         }
                     }
                     if (dataRaw[i].equals("z")){

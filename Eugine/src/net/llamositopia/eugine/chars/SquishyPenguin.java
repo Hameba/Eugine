@@ -5,7 +5,7 @@ import net.llamositopia.eugine.Squishy;
 public class SquishyPenguin extends Squishy {
     public static SquishyPenguin penguin = new SquishyPenguin();
     public SquishyPenguin() {
-        super("penguin", 5, 25, 55);
+        super("penguin", 5, 25, 55, 4, 0, 0);
     }
 
     public void usePrimaryAbility() {

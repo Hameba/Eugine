@@ -145,7 +145,12 @@ public abstract class Squishy {
     }
 
     public void damage(int meleeDamage, Squishy source) {
-        this.health -= meleeDamage;
+        this.health -= (meleeDamage-def<=0 ? meleeDamage-def : 0);
+        this.lastDamageSource = source;
+    }
+
+    public void damageRanged(int rangedDamage, Squishy source) {
+        this.health -= (rangedDamage-def<=0 ? meleeDamage-def : 0);
         this.lastDamageSource = source;
     }
 
@@ -203,4 +208,16 @@ public abstract class Squishy {
 
     public abstract boolean isPrimaryActive();
     public abstract boolean isSecondaryActive();
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public int getDef() {
+        return def;
+    }
+
+    public int getPr_def() {
+        return pr_def;
+    }
 }

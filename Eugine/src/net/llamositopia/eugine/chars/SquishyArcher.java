@@ -5,7 +5,7 @@ import net.llamositopia.eugine.Squishy;
 public class SquishyArcher extends Squishy {
     public static SquishyArcher archer = new SquishyArcher();
     public SquishyArcher() {
-        super("archer", 10, 15, 80);
+        super("archer", 10, 15, 80, 4, 0, 0);
     }
 
     public void usePrimaryAbility() {
