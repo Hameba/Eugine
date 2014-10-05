@@ -145,12 +145,12 @@ public abstract class Squishy {
     }
 
     public void damage(int meleeDamage, Squishy source) {
-        this.health -= (meleeDamage-def<=0 ? meleeDamage-def : 0);
+        this.health -= (meleeDamage-def>=0 ? meleeDamage-def : 0);
         this.lastDamageSource = source;
     }
 
     public void damageRanged(int rangedDamage, Squishy source) {
-        this.health -= (rangedDamage-def<=0 ? meleeDamage-def : 0);
+        this.health -= (rangedDamage-def>=0 ? meleeDamage-def : 0);
         this.lastDamageSource = source;
     }
 

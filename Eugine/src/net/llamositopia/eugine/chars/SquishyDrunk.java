@@ -4,7 +4,7 @@ import net.llamositopia.eugine.Squishy;
 
 public class SquishyDrunk extends Squishy {
     public SquishyDrunk() {
-        super("drunk", 20, 1, 175, 6, 0, 0);
+        super("drunk", 20, 1, 175, 5, 5, 0);
     }
 
     public void usePrimaryAbility() {
