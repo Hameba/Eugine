@@ -9,6 +9,9 @@ import java.util.ArrayList;
 public abstract class Squishy {
 
     private static ArrayList<Squishy> squishies = new ArrayList<Squishy>();
+    private final int speed;
+    private final int def;
+    private final int pr_def;
 
     private Image rest, melee1, melee2, melee3, pr;
 
@@ -31,12 +34,15 @@ public abstract class Squishy {
     private boolean prIsMoving = false;
     private final ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
-    public Squishy(String key, int meleeDamage, int rangedDamage, int maxHealth){
+    public Squishy(String key, int meleeDamage, int rangedDamage, int maxHealth, int speed, int def, int pr_def){
         this.meleeDamage = meleeDamage;
         this.rangedDamage = rangedDamage;
         this.maxHealth = maxHealth;
         this.health = maxHealth;
         this.key = key;
+        this.speed = speed;
+        this.def = def;
+        this.pr_def = pr_def;
         try {
             pr = new Image("res/img/char/pr_" + key + ".png");
             SpriteSheet sprites = new SpriteSheet("res/img/char/" + key + ".png", 82, 32);
@@ -168,6 +174,7 @@ public abstract class Squishy {
             Class.forName("net.llamositopia.eugine.chars.SquishyMage");
             Class.forName("net.llamositopia.eugine.chars.SquishyNinja");
             Class.forName("net.llamositopia.eugine.chars.SquishyPenguin");
+            Class.forName("net.llamositopia.eugine.chars.SquishyGorilla");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
