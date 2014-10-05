@@ -179,7 +179,6 @@ public abstract class Squishy {
             Class.forName("net.llamositopia.eugine.chars.SquishyMage");
             Class.forName("net.llamositopia.eugine.chars.SquishyNinja");
             Class.forName("net.llamositopia.eugine.chars.SquishyPenguin");
-            Class.forName("net.llamositopia.eugine.chars.SquishyGorilla");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
