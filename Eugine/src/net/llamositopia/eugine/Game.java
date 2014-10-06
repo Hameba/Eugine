@@ -1,5 +1,6 @@
 package net.llamositopia.eugine;
 
+import com.duckblade.eugine.api.arenas.*;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;

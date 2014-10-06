@@ -1,4 +1,4 @@
-package net.llamositopia.eugine;
+package com.duckblade.eugine.api;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -26,7 +26,7 @@ public abstract class Squishy {
     private String IP = null;
     private int imageInt = 0;
 
-    protected int ammo = 15;
+    public int ammo = 15;
 
     public int lives = 5;
     private Squishy lastDamageSource = null;
@@ -172,14 +172,14 @@ public abstract class Squishy {
 
     public static Squishy[] values() {
         try {
-            Class.forName("net.llamositopia.eugine.chars.SquishyArcher");
-            Class.forName("net.llamositopia.eugine.chars.SquishyBrainiac");
-            Class.forName("net.llamositopia.eugine.chars.SquishyBruiser");
-            Class.forName("net.llamositopia.eugine.chars.SquishyGenie");
-            Class.forName("net.llamositopia.eugine.chars.SquishyMage");
-            Class.forName("net.llamositopia.eugine.chars.SquishyNinja");
-            Class.forName("net.llamositopia.eugine.chars.SquishyPenguin");
-            Class.forName("net.llamositopia.eugine.chars.SquishyDrunk");
+            Class.forName("SquishyArcher");
+            Class.forName("SquishyBrainiac");
+            Class.forName("SquishyBruiser");
+            Class.forName("SquishyGenie");
+            Class.forName("SquishyMage");
+            Class.forName("SquishyNinja");
+            Class.forName("SquishyPenguin");
+            Class.forName("SquishyDrunk");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

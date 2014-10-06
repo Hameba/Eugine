@@ -1,4 +1,4 @@
-package net.llamositopia.eugine.chars;
+package com.duckblade.eugine.api.chars;
 
 import net.llamositopia.eugine.Squishy;
 

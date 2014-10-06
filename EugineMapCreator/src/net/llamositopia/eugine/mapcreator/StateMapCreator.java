@@ -12,8 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.color.ColorSpace;
 import java.awt.image.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -75,18 +74,6 @@ public class StateMapCreator extends BasicGameState {
             g.setColor(a.getState()==0 ? Color.green : a.getState()==1 ? Color.blue : a.getState()==2 ? Color.orange : a.getState()==3 ? Color.magenta : a.getState()==4 ? Color.gray : a.getState()==5 ? Color.red : a.getState()==6 ? Color.yellow : Color.pink);
             g.fillRect(a.x, a.y, 8, 8);
         }
-        if (capturing!=-1){
-            Image i = new Image(800, 600);
-            g.copyArea(i, 0, 0);
-            i = i.getFlippedCopy(false, true);
-            BufferedImage bi = toBufferedImage(i, false);
-            try {
-                ImageIO.write(bi, "png", new File(new SimpleDateFormat("mm-ss").format(new Date()) + ".png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            capturing = 0;
-        }
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
@@ -108,7 +95,20 @@ public class StateMapCreator extends BasicGameState {
             tiles.remove(new Tile(roundDown(gc.getInput().getMouseX()), roundDown(gc.getInput().getMouseY())));
         }
         if (gc.getInput().isKeyPressed(Input.KEY_F5)){
-            capturing = 0;
+            String id = JOptionPane.showInputDialog("Please enter a map id:");
+            new File("..\\Squishy-API\\res\\arena\\" + id).mkdirs();
+            try {
+                PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream("..\\Squishy-API\\res\\arena\\" + id + "\\floors.dat", false)));
+                for (Tile a : tiles){
+                    out.println(a.x + ";" + a.y);
+                    out.flush();
+                }
+                out.close();
+                BufferedImage bi = toBufferedImage(bg, true);
+                ImageIO.write(bi, "png", new File("..\\Squishy-API\\res\\arena\\" + id + "\\bg.png"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -116,7 +116,8 @@ public class StateMapCreator extends BasicGameState {
         return (int) (Math.floor(x / 8d) * 8);
     }
 
-    private BufferedImage toBufferedImage(Image image, boolean hasAlpha) {
+    private BufferedImage toBufferedImage(Image i, boolean hasAlpha) {
+        Image image = i.getFlippedCopy(false, true);
         int len = 4 * image.getWidth() * image.getHeight();
         if (!hasAlpha) {
             len = 3 * image.getWidth() * image.getHeight();

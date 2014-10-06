@@ -1,11 +1,11 @@
-package net.llamositopia.eugine.chars;
+package com.duckblade.eugine.api.chars;
 
 import net.llamositopia.eugine.Squishy;
 
-public class SquishyArcher extends Squishy {
-    public static SquishyArcher archer = new SquishyArcher();
-    public SquishyArcher() {
-        super("archer", 10, 15, 80, 6, 0, 0);
+public class SquishyMage extends Squishy {
+    public static SquishyMage mage = new SquishyMage();
+    private SquishyMage() {
+        super("mage", 10, 20, 60, 4, 0, 10);
     }
 
     public void usePrimaryAbility() {

@@ -1,11 +1,11 @@
-package net.llamositopia.eugine.chars;
+package com.duckblade.eugine.api.chars;
 
 import net.llamositopia.eugine.Squishy;
 
-public class SquishyBrainiac extends Squishy {
-    public static SquishyBrainiac brainiac = new SquishyBrainiac();
-    public SquishyBrainiac() {
-        super("brainiac", 20, 20, 45, 3, -5, -10);
+public class SquishyPenguin extends Squishy {
+    public static SquishyPenguin penguin = new SquishyPenguin();
+    public SquishyPenguin() {
+        super("penguin", 5, 25, 55, 5, 0, 0);
     }
 
     public void usePrimaryAbility() {

@@ -1,4 +1,4 @@
-package net.llamositopia.eugine;
+package com.duckblade.eugine.api;
 
 import org.newdawn.slick.Image;
 

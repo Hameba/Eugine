@@ -3,22 +3,15 @@ package net.llamositopia.eugine;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.concurrent.CopyOnWriteArrayList;
+
+import com.duckblade.eugine.api.Squishy;
+import com.duckblade.eugine.api.StateArena;
 
 public class NetworkManager {
 
     private static ObjectOutputStream oos;
     private static ObjectInputStream ois;
-
-    private static ServerSocket ss;
-
-    private static boolean isServer = false;
-    protected static final CopyOnWriteArrayList<ObjectOutputStream> outs = new CopyOnWriteArrayList<ObjectOutputStream>();
-    protected static final CopyOnWriteArrayList<ObjectInputStream> ins = new CopyOnWriteArrayList<ObjectInputStream>();
 
     public static void connect(String ip){
         try {
@@ -49,79 +42,11 @@ public class NetworkManager {
         }
     }
 
-    public static boolean isServer(){
-        return isServer;
-    }
 
-    public static void startServer(){
-        try {
-            isServer = true;
-            ss = new ServerSocket(21499);
-            int map = new Random().nextInt(StateArena.arenas.size());
-            VH.sbg.enterState(map+10);
-            VH.mapName = ((StateArena)VH.sbg.getState(map+10)).getArenaKey();
-            new Thread(new Runnable() {
-                public void run() {
-                    while (true) {
-                        try {
-                            Socket s = ss.accept();
-                            System.out.println("Recieved connection attempt from " + s.getInetAddress());
-                            ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
-                            oos.flush();
-                            ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
-                            String ch = (String) ois.readObject();
-                            boolean wrongChar = false;
-                            for (Squishy c : Squishy.values()){
-                                if (c.getKey().equals(ch)){
-                                    if (c.getIP()!=null){
-                                        wrongChar = true;
-                                    }
-                                }
-                            }
-                            if (wrongChar){
-                                oos.writeBoolean(false);
-                                s.close();
-                                System.out.println("Kicking " + s.getInetAddress());
-                                continue;
-                            }
-                            oos.writeBoolean(true);
-                            String chars = ch;
-                            for (Squishy c : VH.arena.squishies){
-                                if (c.getKey().equals(ch)){
-                                    continue;
-                                }
-                                chars += ";" + c.getKey();
-                            }
-                            oos.writeObject(chars);
-                            oos.writeObject(VH.mapName);
-                            synchronized (outs){
-                                outs.add(oos);
-                                ins.add(ois);
-                            }
-                            VH.arena.squishies.add(Squishy.valueOf(ch.toUpperCase()));
-                            Squishy.valueOf(ch.toUpperCase()).setIP(String.valueOf(s.getInetAddress()));
-                            System.out.println(s.getInetAddress() + " has successfully connected to the game as the " + ch + ".");
-                            Squishy.valueOf(ch.toUpperCase()).setX(-25);
-                            Squishy.valueOf(ch.toUpperCase()).setY(0);
-                            Squishy.valueOf(ch.toUpperCase()).risingFrames = -1;
-                            Squishy.valueOf(ch.toUpperCase()).frames = -1;
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (ClassNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }).start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        isServer = true;
-    }
 
     public static void send(String outData) {
         try {
-            System.out.println("Sending " + outData  + " to the server.");
+            System.out.println("Sending " + outData  + " to the api.");
             oos.writeObject(outData);
             oos.flush();
         } catch (IOException e) {

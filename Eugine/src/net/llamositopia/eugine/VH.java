@@ -1,7 +1,9 @@
 package net.llamositopia.eugine;
 
+import com.duckblade.eugine.api.StateArena;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.state.StateBasedGame;
+import com.duckblade.eugine.api.Squishy;
 
 public abstract class VH {
 
