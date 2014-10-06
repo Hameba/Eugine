@@ -17,7 +17,7 @@ public class Main {
     }
 
     private static void runLogicUpdate() {
-        for (Squishy c : squishies){
+        for (Squishy c : VH.arena.squishies){
             for (Iterator<Projectile> i = c.getProjectiles().iterator();i.hasNext();){
                 Projectile p = i.next();
                 if (p.getX()<0 || p.getX()>800){

@@ -1,14 +1,10 @@
 package com.duckblade.eugine.api;
 
-import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Scanner;
 
 public abstract class StateArena extends BasicGameState{
 
@@ -22,25 +18,18 @@ public abstract class StateArena extends BasicGameState{
 
     public ArrayList<Squishy> squishies = new ArrayList<Squishy>();
 
-    private Image floorImage;
-
-    protected Image bg;
-
     public static ArrayList<StateArena> arenas = new ArrayList<StateArena>();
 
-    public Image getBackground() throws SlickException{
-        Image i = new Image("res/img/" + getArenaKey() + "/background.png");
-        Floor.clearFloors();
-        for (int x = 0; x < i.getWidth(); x++) {
-            for (int y = 0; y < i.getHeight(); y++) {
-                if (x%8==0 && y%8==0){
-                    if (i.getColor(x, y).equals(new Color(0xff00ff))){
-                        new Floor(x, y);
-                    }
-                }
+    public void loadFloors(){
+        try {
+            Scanner reader = new Scanner(new File("res/arena/" + getArenaKey() + "/floors.dat"));
+            while (reader.hasNextLine()){
+                String floor = reader.nextLine();
+                new Floor(Integer.parseInt(floor.split(";")[0]), Integer.parseInt(floor.split(";")[1]));
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return i;
     }
 
     public abstract String getArenaKey();
