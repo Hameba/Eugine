@@ -306,7 +306,7 @@ public abstract class StateArena extends BasicGameState{
                                         break loop;
                                     }
                                 }
-                                c.setX(c.getX()-c.getSpeed());
+                                c.setX(c.getX()+c.getSpeed());
                             }
                         }
                         if (!notMoving){
@@ -337,7 +337,7 @@ public abstract class StateArena extends BasicGameState{
                             }
                         }
                         if (!notMoving){
-                            c.setX(c.getX()+4);
+                            c.setX(c.getX()+c.getSpeed());
                         }
                     }
                     if (dataRaw[i].equals("z")){
