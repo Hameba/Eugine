@@ -40,7 +40,7 @@ public abstract class Squishy {
         this.maxHealth = maxHealth;
         this.health = maxHealth;
         this.key = key;
-        this.speed = 4;
+        this.speed = speed;
         this.def = def;
         this.pr_def = pr_def;
         try {
