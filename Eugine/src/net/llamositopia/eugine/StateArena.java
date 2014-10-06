@@ -300,11 +300,11 @@ public abstract class StateArena extends BasicGameState{
                         loop: for (Floor a : Floor.getFloors()){
                             if (c.getY()<a.getY()+8 && c.getY()+32>a.getY()){
                                 for (int k = 0; k < c.getSpeed(); k++) {
-                                    c.setX(c.getX()-1);
                                     if (a.getX()==c.getX()+25){
                                         notMoving = true;
                                         break loop;
                                     }
+                                    c.setX(c.getX()-1);
                                 }
                                 c.setX(c.getX()+c.getSpeed());
                             }
@@ -327,11 +327,11 @@ public abstract class StateArena extends BasicGameState{
                         loop: for (Floor a : Floor.getFloors()){
                             if (c.getY()<a.getY()+8 && c.getY()+32>a.getY()){
                                 for (int k = 0; k < c.getSpeed(); k++) {
-                                    c.setX(c.getX()+1);
                                     if (a.getX()==c.getX()+57){
                                         notMoving = true;
                                         break loop;
                                     }
+                                    c.setX(c.getX()+1);
                                 }
                                 c.setX(c.getX()-c.getSpeed());
                             }
