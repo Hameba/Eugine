@@ -30,7 +30,7 @@ public class StatePlayerChoose extends BasicGameState {
             g.drawImage(c.getImage(), gc.getWidth()/Squishy.values().length*2*(i/2), i%2==0 ? 268 : 332);
         }
         g.setLineWidth(5);
-        g.drawRect(gc.getWidth()/Squishy.values().length*selected+25+(selected%2==1 ? -114 : 0), 268 + (selected%2==1 ? 64 : 0), 32, 32);
+        g.drawRect(gc.getWidth()/Squishy.values().length*selected+25+(selected%2==1 ? -99 : 0), 268 + (selected%2==1 ? 64 : 0), 32, 32);
         g.drawImage(quit, gc.getWidth()/2-quit.getWidth()/2, gc.getHeight()/2+quit.getHeight()/2+gc.getHeight()/2);
     }
 

@@ -299,7 +299,7 @@ public abstract class StateArena extends BasicGameState{
                         boolean notMoving = false;
                         for (Floor a : Floor.getFloors()){
                             if (c.getY()<a.getY()+8 && c.getY()+32>a.getY()){
-                                if (a.getX()+8<=c.getX()+25){
+                                if (a.getX()+8==c.getX()+25){
                                     notMoving = true;
                                 }
                             }
@@ -327,7 +327,7 @@ public abstract class StateArena extends BasicGameState{
                             }
                         }
                         if (!notMoving){
-                            c.setX(c.getX()+c.getSpeed());
+                            c.setX(c.getX()+4);
                         }
                     }
                     if (dataRaw[i].equals("z")){
