@@ -38,6 +38,8 @@ public class StateGame extends BasicGameState {
             for (Projectile b : a.getProjectiles()){
                 g.drawImage(a.getProjectile(), b.getX(), b.getY());
             }
+            g.drawString("Health: " + a.getHealth(), 50, 50);
+            g.drawString("Lives: " + a.lives, 25, 25);
         }
     }
 

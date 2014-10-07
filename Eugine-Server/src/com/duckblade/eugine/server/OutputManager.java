@@ -23,8 +23,7 @@ public class OutputManager {
         try {
             oos.writeObject(data);
             oos.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
     }
 }
