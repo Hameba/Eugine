@@ -24,7 +24,7 @@ public class Main {
         for (Squishy c : VH.arena.squishies){
             for (Iterator<Projectile> i = c.getProjectiles().iterator();i.hasNext();){
                 Projectile p = i.next();
-                if (p.getX()<0 || p.getX()>800){
+                if (p.getX()<0 || p.getX()>1280){
                     i.remove();
                 }
                 if (p.getLeft()){

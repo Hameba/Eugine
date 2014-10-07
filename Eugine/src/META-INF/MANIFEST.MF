@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
+Class-Path: slick.jar lwjgl.jar Squishy-API.jar
 Main-Class: net.llamositopia.eugine.Main
 

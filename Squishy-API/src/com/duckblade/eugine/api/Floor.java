@@ -44,7 +44,7 @@ public class Floor {
                 return true;
             }
         }
-        return !(c.getY()<568);
+        return !(c.getY()<688);
     }
 
     public static void clearFloors(){

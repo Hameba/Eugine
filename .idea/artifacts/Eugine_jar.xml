@@ -1,14 +1,8 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="Eugine:jar">
-    <output-path>$USER_HOME$/Desktop</output-path>
+    <output-path>$PROJECT_DIR$/Eugine/out/artifacts/Eugine_jar</output-path>
     <root id="archive" name="Eugine.jar">
       <element id="module-output" name="Eugine" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/Squishy-API/jorbis.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/Squishy-API/jinput.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/Squishy-API/lwjgl.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/Eugine/slick.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/Squishy-API/mod_Dependances.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/Squishy-API/jogg-0.0.7.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

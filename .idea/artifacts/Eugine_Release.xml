@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact name="Eugine-Release">
+    <output-path>$USER_HOME$/Dropbox/Eugine/Latest</output-path>
+    <root id="root">
+      <element id="directory" name="Eugine">
+        <element id="artifact" artifact-name="Eugine:jar" />
+        <element id="artifact" artifact-name="Squishy-API:jar" />
+        <element id="file-copy" path="$PROJECT_DIR$/Eugine/slick.jar" />
+        <element id="file-copy" path="$PROJECT_DIR$/Squishy-API/lwjgl.jar" />
+        <element id="file-copy" path="$PROJECT_DIR$/Squishy-API/jinput.jar" />
+        <element id="directory" name="res">
+          <element id="dir-copy" path="$PROJECT_DIR$/Squishy-API/res" />
+        </element>
+        <element id="file-copy" path="$PROJECT_DIR$/Squishy-API/jinput-dx8.dll" />
+        <element id="file-copy" path="$PROJECT_DIR$/Squishy-API/jinput-dx8_64.dll" />
+        <element id="file-copy" path="$PROJECT_DIR$/Squishy-API/jinput-raw.dll" />
+        <element id="file-copy" path="$PROJECT_DIR$/Squishy-API/jinput-raw_64.dll" />
+        <element id="file-copy" path="$PROJECT_DIR$/Squishy-API/lwjgl.dll" />
+        <element id="file-copy" path="$PROJECT_DIR$/Squishy-API/lwjgl64.dll" />
+      </element>
+    </root>
+  </artifact>
+</component>
