@@ -14,6 +14,7 @@ public class Game extends StateBasedGame {
         addState(new StateMenu());
         addState(new StateConnect());
         addState(new StatePlayerChoose());
+        addState(new StateGame());
         enterState(0);
     }
 }

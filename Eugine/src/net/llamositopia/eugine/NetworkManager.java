@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import com.duckblade.eugine.api.Projectile;
 import com.duckblade.eugine.api.Squishy;
@@ -16,32 +17,23 @@ public class NetworkManager {
     private static ObjectOutputStream oos;
     private static ObjectInputStream ois;
 
-    public static void connect(String ip){
+    public static void connect(String ip, int port){
         try {
-            Socket s = new Socket(ip, 21499);
+            Socket s = new Socket(ip, port);
             oos = new ObjectOutputStream(s.getOutputStream());
             oos.flush();
             ois = new ObjectInputStream(s.getInputStream());
-            oos.writeObject(true);
+            oos.writeBoolean(true);
             oos.writeObject(VH.myChar.getKey());
             if (ois.readBoolean()){
                 String chars = (String) ois.readObject();
-                String map = (String) ois.readObject();
-                System.out.println("Entering map: " + map);
-                for (StateArena b : StateArena.arenas){
-                    if (b.getArenaKey().equalsIgnoreCase(map)){
-                        VH.sbg.enterState(b.getID());
-                        VH.arena = (StateArena) VH.sbg.getState(b.getID());
-                        break;
-                    }
-                }
+                System.out.println("Entering map: " + VH.arena);
+                VH.sbg.enterState(3);
                 for (String a : chars.split(";")){
                     VH.arena.squishies.add(Squishy.valueOf(a.toUpperCase()));
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -107,7 +99,34 @@ public class NetworkManager {
         }
     }
 
-    public static void ping(String ip) {
-
+    public static void ping(String ip, int port) {
+        try {
+            Socket s = new Socket(ip, port);
+            ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+            oos.flush();
+            ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
+            oos.writeBoolean(false);
+            oos.flush();
+            System.out.println("Sent false");
+            String map = (String) ois.readObject();
+            System.out.println("Got map: " + map);
+            for (StateArena a : StateArena.arenas){
+                if (a.getArenaKey().equals(map)){
+                    VH.arena = a;
+                    System.out.println("Found arena: " + VH.arena.getArenaKey());
+                }
+            }
+            String options = (String) ois.readObject();
+            System.out.println("Got options: " + options);
+            for (String a : options.split(";")){
+                VH.options.clear();
+                VH.options.add(Squishy.valueOf(a));
+            }
+            System.out.println("Loaded options");
+            s.close();
+            System.out.println("Closed socket");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

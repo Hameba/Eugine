@@ -15,5 +15,6 @@ public abstract class VH {
     public static StateArena arena;
     public static ArrayList<Squishy> options = new ArrayList<Squishy>();
     public static String ip;
+    public static int port;
 
 }

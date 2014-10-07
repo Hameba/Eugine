@@ -37,6 +37,7 @@ public class NetworkManager {
                             oos.flush();
                             final ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
                             if (ois.readBoolean()){
+                                System.out.println("Got true");
                                 String ch = (String) ois.readObject();
                                 boolean wrongChar = false;
                                 for (Squishy c : Squishy.values()){
@@ -82,14 +83,21 @@ public class NetworkManager {
                                     }
                                 }).start();
                             }else{
+                                System.out.println("Got false");
+                                oos.writeObject(VH.arena.getArenaKey());
+                                oos.flush();
+                                System.out.println("Sent map");
                                 String options = "";
                                 for (Squishy a : Squishy.values()){
-                                    if (a.getIP()!=null){
+                                    if (a.getIP()==null){
                                         options+=options.equals("") ? a.getKey() : ";" + a.getKey();
                                     }
                                 }
                                 oos.writeObject(options);
                                 oos.flush();
+                                System.out.println("Sent options");
+                                s.close();
+                                System.out.println("Closed socket");
                             }
                         }catch (Exception e){
                             e.printStackTrace();

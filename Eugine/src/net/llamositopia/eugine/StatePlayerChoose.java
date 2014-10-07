@@ -54,7 +54,8 @@ public class StatePlayerChoose extends BasicGameState {
         if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)){
             if (gc.getInput().getMouseX()>gc.getWidth()/2-play.getWidth()/2 && gc.getInput().getMouseX()<gc.getWidth()/2+play.getWidth()/2 && gc.getInput().getMouseY()>gc.getHeight()/2-play.getHeight()/2+gc.getHeight()/5 && gc.getInput().getMouseY()>gc.getHeight()/2+play.getHeight()/2+gc.getHeight()/5){
                 VH.myChar = Squishy.values()[selected];
-                sbg.enterState(2);
+                NetworkManager.connect(VH.ip, VH.port);
+                sbg.enterState(3);
             }
             if (gc.getInput().getMouseX()>gc.getWidth()/2-quit.getWidth()/2 && gc.getInput().getMouseX()<gc.getWidth()/2+quit.getWidth()/2 && gc.getInput().getMouseY()>gc.getHeight()/2-quit.getHeight()/2+gc.getHeight()/3 && gc.getInput().getMouseY()>gc.getHeight()/2+quit.getHeight()/2+gc.getHeight()/3){
                 sbg.enterState(0);

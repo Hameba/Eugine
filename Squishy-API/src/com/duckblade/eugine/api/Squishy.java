@@ -33,6 +33,7 @@ public abstract class Squishy {
     public boolean prIsMovingLeft;
     private boolean prIsMoving = false;
     private final ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+    private boolean loaded = false;
 
     public Squishy(String key, int meleeDamage, int rangedDamage, int maxHealth, int speed, int def, int pr_def){
         this.meleeDamage = meleeDamage;
@@ -43,20 +44,23 @@ public abstract class Squishy {
         this.speed = speed;
         this.def = def;
         this.pr_def = pr_def;
-        try {
-            pr = new Image("res/img/char/pr_" + key + ".png");
-            SpriteSheet sprites = new SpriteSheet("res/img/char/" + key + ".png", 82, 32);
-            rest = sprites.getSprite(0, 0);
-            melee1 = sprites.getSprite(1, 0);
-            melee2 = sprites.getSprite(2, 0);
-            melee3 = sprites.getSprite(3, 0);
-        } catch (SlickException e) {
-            e.printStackTrace();
-        }
         squishies.add(this);
     }
 
     public Image getImage(){
+        if (!loadedImages()){
+            try {
+                pr = new Image("res/img/char/pr_" + key + ".png");
+                SpriteSheet sprites = new SpriteSheet("res/img/char/" + key + ".png", 82, 32);
+                rest = sprites.getSprite(0, 0);
+                melee1 = sprites.getSprite(1, 0);
+                melee2 = sprites.getSprite(2, 0);
+                melee3 = sprites.getSprite(3, 0);
+                loaded = true;
+            } catch (SlickException e) {
+                e.printStackTrace();
+            }
+        }
         if (imageInt==0){
             return rest;
         }
@@ -82,6 +86,10 @@ public abstract class Squishy {
             return melee3.getFlippedCopy(true, false);
         }
         return rest;
+    }
+
+    private boolean loadedImages() {
+        return loaded;
     }
 
     public Image getProjectile() {

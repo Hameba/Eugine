@@ -1,6 +1,7 @@
 package net.llamositopia.eugine;
 
 import com.duckblade.eugine.api.Floor;
+import com.duckblade.eugine.api.Squishy;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -17,11 +18,7 @@ public class StateGame extends BasicGameState {
 
     public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException {
         bg = new Image("res/arena/" + VH.arena.getArenaKey() + "/bg.png");
-        new Thread(new Runnable() {
-            public void run() {
-
-            }
-        }).start();
+        VH.arena.loadFloors();
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
@@ -35,9 +32,13 @@ public class StateGame extends BasicGameState {
         for (Floor a : Floor.getFloors()){
             g.drawImage(floorImage, a.getX(), a.getY());
         }
+        for (Squishy a : Squishy.values()){
+            g.drawImage(a.getImage(), a.getX(), a.getY());
+        }
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-
+        NetworkManager.send(gc);
+        NetworkManager.receive();
     }
 }

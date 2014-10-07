@@ -42,11 +42,14 @@ public class StateConnect extends BasicGameState {
                     c.setX(-100);
                     c.setY(-100);
                 }
-                VH.ip = ip;
-                NetworkManager.ping(ip);
+                VH.ip = ip.split(":")[0];
+                int port = ip.split(":").length>1 ? Integer.parseInt(ip.split(":")[1]) : 21499;
+                VH.port = port;
+                NetworkManager.ping(ip, port);
+                sbg.enterState(1);
             }
             if (gc.getInput().getMouseX()>gc.getWidth()/2-quit.getWidth()/2 && gc.getInput().getMouseX()<gc.getWidth()/2+quit.getWidth()/2 && gc.getInput().getMouseY()>gc.getHeight()/2-quit.getHeight()/2+gc.getHeight()/3 && gc.getInput().getMouseY()>gc.getHeight()/2+quit.getHeight()/2+gc.getHeight()/3){
-                sbg.enterState(1);
+                sbg.enterState(0);
             }
         }
         String add = "";
