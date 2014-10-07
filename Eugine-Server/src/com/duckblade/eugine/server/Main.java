@@ -1,5 +1,9 @@
 package com.duckblade.eugine.server;
 
+import com.duckblade.eugine.api.Floor;
+import com.duckblade.eugine.api.Projectile;
+import com.duckblade.eugine.api.Squishy;
+
 import java.util.Iterator;
 
 public class Main {
@@ -27,7 +31,7 @@ public class Main {
                     loop: for (int j = 0; j < 6; j++) {
                         for (Floor a : Floor.getFloors()){
                             if (p.getY()<a.getY()+8){
-                                if (p.getY()+p.getImage().getHeight()>a.getY()){
+                                if (p.getY()+16>a.getY()){
                                     if (p.getX()==a.getX()+8){
                                         i.remove();
                                         break loop;
@@ -41,8 +45,8 @@ public class Main {
                     loop: for (int j = 0; j < 6; j++) {
                         for (Floor a : Floor.getFloors()){
                             if (p.getY()<a.getY()+8){
-                                if (p.getY()+p.getImage().getHeight()>a.getY()){
-                                    if (p.getX()+p.getImage().getWidth()==a.getX()){
+                                if (p.getY()+16>a.getY()){
+                                    if (p.getX()+16==a.getX()){
                                         i.remove();
                                         break loop;
                                     }
@@ -121,11 +125,11 @@ public class Main {
                 if (c.frames==0 && (c.getImageInt()==2 || c.getImageInt()==3)){
                     if (c.getY()<c2.getY()+32 && c.getY()+32>c2.getY()){
                         if (c.isFacingLeft()){
-                            if (c.getX()<=c2.getX()+c2.getImage().getWidth() && c.getX()+c.getImage().getWidth()-25>c2.getX() && c.getY()<=c2.getY()+c2.getImage().getHeight() && c.getY()+c.getImage().getHeight()>c2.getY()){
+                            if (c.getX()<=c2.getX()+82 && c.getX()+82-25>c2.getX() && c.getY()<=c2.getY()+32 && c.getY()+32>c2.getY()){
                                 c2.damage(c.getMeleeDamage(), c);
                             }
                         }else{
-                            if (c.getX()<=c2.getX()+c2.getImage().getWidth() && c.getX()+c.getImage().getWidth()+25>c2.getX() && c.getY()<=c2.getY()+c2.getImage().getHeight() && c.getY()+c.getImage().getHeight()>c2.getY()){
+                            if (c.getX()<=c2.getX()+82 && c.getX()+82+25>c2.getX() && c.getY()<=c2.getY()+32 && c.getY()+32>c2.getY()){
                                 c2.damage(c.getMeleeDamage(), c);
                             }
                         }
@@ -133,7 +137,7 @@ public class Main {
                 }
                 for (Iterator<Projectile> i = c.getProjectiles().iterator();i.hasNext();){
                     Projectile p = i.next();
-                    if (p.getX()<c2.getX()+82 && p.getX()+c.getProjectile().getWidth()>c2.getX() && p.getY()<c2.getY()+32 && p.getY()+c.getProjectile().getHeight()>c2.getY()){
+                    if (p.getX()<c2.getX()+82 && p.getX()+16>c2.getX() && p.getY()<c2.getY()+32 && p.getY()+16>c2.getY()){
                         c2.damageRanged(c.getRangedDamage(), c);
                         i.remove();
                     }

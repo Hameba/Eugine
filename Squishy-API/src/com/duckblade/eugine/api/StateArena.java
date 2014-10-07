@@ -1,4 +1,6 @@
-package com.duckblade.eugine.server;
+package com.duckblade.eugine.api;
+
+import com.duckblade.eugine.api.arenas.StateArenaLumberyard;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,6 +19,14 @@ public abstract class StateArena {
     public ArrayList<Squishy> squishies = new ArrayList<Squishy>();
 
     public static ArrayList<StateArena> arenas = new ArrayList<StateArena>();
+
+    public StateArena(){
+        arenas.add(this);
+    }
+
+    static{
+        new StateArenaLumberyard();
+    }
 
     public void loadFloors(){
         try {

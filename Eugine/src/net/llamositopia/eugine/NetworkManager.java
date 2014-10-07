@@ -5,9 +5,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import com.duckblade.eugine.server.Projectile;
-import com.duckblade.eugine.server.Squishy;
-import com.duckblade.eugine.server.StateArena;
+import com.duckblade.eugine.api.Projectile;
+import com.duckblade.eugine.api.Squishy;
+import com.duckblade.eugine.api.StateArena;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 

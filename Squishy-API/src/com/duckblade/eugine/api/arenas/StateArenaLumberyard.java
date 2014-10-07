@@ -1,6 +1,6 @@
-package com.duckblade.eugine.server.arenas;
+package com.duckblade.eugine.api.arenas;
 
-import com.duckblade.eugine.server.StateArena;
+import com.duckblade.eugine.api.StateArena;
 
 public class StateArenaLumberyard extends StateArena {
     protected int getArenaID() {

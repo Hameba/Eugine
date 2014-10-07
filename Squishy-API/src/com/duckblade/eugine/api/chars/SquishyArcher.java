@@ -1,6 +1,6 @@
-package com.duckblade.eugine.server.chars;
+package com.duckblade.eugine.api.chars;
 
-import com.duckblade.eugine.server.Squishy;
+import com.duckblade.eugine.api.Squishy;
 
 public class SquishyArcher extends Squishy {
     public static SquishyArcher archer = new SquishyArcher();

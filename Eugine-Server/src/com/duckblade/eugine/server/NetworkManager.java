@@ -1,5 +1,8 @@
 package com.duckblade.eugine.server;
 
+import com.duckblade.eugine.api.Squishy;
+import com.duckblade.eugine.api.StateArena;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -22,6 +25,7 @@ public class NetworkManager {
         try{
             ss = new ServerSocket(port);
             arena = StateArena.arenas.get(new Random().nextInt(StateArena.arenas.size()));
+            arena.loadFloors();
             mapName = arena.getArenaKey();
             new Thread(new Runnable() {
                 public void run() {

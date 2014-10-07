@@ -1,6 +1,6 @@
-package com.duckblade.eugine.server.chars;
+package com.duckblade.eugine.api.chars;
 
-import com.duckblade.eugine.server.Squishy;
+import com.duckblade.eugine.api.Squishy;
 
 public class SquishyBrainiac extends Squishy {
     public static SquishyBrainiac brainiac = new SquishyBrainiac();

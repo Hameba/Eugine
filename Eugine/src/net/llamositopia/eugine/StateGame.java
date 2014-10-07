@@ -1,6 +1,6 @@
 package net.llamositopia.eugine;
 
-import com.duckblade.eugine.server.Floor;
+import com.duckblade.eugine.api.Floor;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;

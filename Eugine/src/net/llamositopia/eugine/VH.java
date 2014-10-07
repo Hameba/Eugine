@@ -1,7 +1,7 @@
 package net.llamositopia.eugine;
 
-import com.duckblade.eugine.server.Squishy;
-import com.duckblade.eugine.server.StateArena;
+import com.duckblade.eugine.api.Squishy;
+import com.duckblade.eugine.api.StateArena;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.state.StateBasedGame;
 

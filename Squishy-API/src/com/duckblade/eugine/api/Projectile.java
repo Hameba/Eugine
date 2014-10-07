@@ -1,4 +1,4 @@
-package com.duckblade.eugine.server;
+package com.duckblade.eugine.api;
 
 import org.newdawn.slick.Image;
 

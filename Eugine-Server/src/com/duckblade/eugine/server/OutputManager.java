@@ -1,5 +1,8 @@
 package com.duckblade.eugine.server;
 
+import com.duckblade.eugine.api.Projectile;
+import com.duckblade.eugine.api.Squishy;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
