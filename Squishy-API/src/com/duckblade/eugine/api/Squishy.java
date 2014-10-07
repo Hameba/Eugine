@@ -181,13 +181,13 @@ public abstract class Squishy {
     public static Squishy[] values() {
         try {
             Class.forName("com.duckblade.eugine.api.chars.SquishyArcher");
-            Class.forName("com.duckblade.eugine.api.chars.SquishyArcher");
-            Class.forName("com.duckblade.eugine.api.chars.SquishyArcher");
-            Class.forName("com.duckblade.eugine.api.chars.SquishyArcher");
-            Class.forName("com.duckblade.eugine.api.chars.SquishyArcher");
-            Class.forName("com.duckblade.eugine.api.chars.SquishyArcher");
-            Class.forName("com.duckblade.eugine.api.chars.SquishyArcher");
-            Class.forName("com.duckblade.eugine.api.chars.SquishyArcher");
+            Class.forName("com.duckblade.eugine.api.chars.SquishyBrainiac");
+            Class.forName("com.duckblade.eugine.api.chars.SquishyBruiser");
+            Class.forName("com.duckblade.eugine.api.chars.SquishyDrunk");
+            Class.forName("com.duckblade.eugine.api.chars.SquishyGenie");
+            Class.forName("com.duckblade.eugine.api.chars.SquishyMage");
+            Class.forName("com.duckblade.eugine.api.chars.SquishyNinja");
+            Class.forName("com.duckblade.eugine.api.chars.SquishyPenguin");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
