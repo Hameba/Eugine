@@ -26,7 +26,7 @@ public class StatePlayerChoose extends BasicGameState {
         g.drawImage(bg, 0, 0);
         g.drawImage(play, gc.getWidth() / 2 - play.getWidth() / 2, gc.getHeight() / 2 + play.getHeight() / 2 + gc.getHeight() / 5);
         g.setColor(Color.white);
-        for (int i = 0; i < Squishy.values().length; i++) {
+        for (int i = 0; i < VH.options.size(); i++) {
             Squishy c  = Squishy.values()[i];
             g.drawImage(c.getImage(), gc.getWidth()/Squishy.values().length*2*(i/2), i%2==0 ? 268 : 332);
         }
