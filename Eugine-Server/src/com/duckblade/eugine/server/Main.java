@@ -78,16 +78,16 @@ public class Main {
                 if (c.getX()<-25){
                     c.setX(-25);
                 }
-                if (c.getX()>743){
-                    c.setX(743);
+                if (c.getX()>1223){
+                    c.setX(1223);
                 }
                 if (c.getY()<0){
                     c.setY(0);
                 }
-                if (c.getY()>567){
+                if (c.getY()>688){
                     c.deadFrames = 0;
                     c.setHealth(c.getMaxHealth());
-                    c.setY(567);
+                    c.setY(688);
                 }
             }
             if (c.risingFrames!=-1) {
