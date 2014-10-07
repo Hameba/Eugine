@@ -1,6 +1,6 @@
-package com.duckblade.eugine.api.arenas;
+package com.duckblade.eugine.server.arenas;
 
-import com.duckblade.eugine.api.StateArena;
+import com.duckblade.eugine.server.StateArena;
 
 public class StateArenaPlains extends StateArena {
 
@@ -8,7 +8,7 @@ public class StateArenaPlains extends StateArena {
         return 0;
     }
 
-    protected String getArenaKey() {
+    public String getArenaKey() {
         return "plains";
     }
 

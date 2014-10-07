@@ -1,12 +1,10 @@
-package com.duckblade.eugine.api;
-
-import org.newdawn.slick.state.BasicGameState;
+package com.duckblade.eugine.server;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public abstract class StateArena extends BasicGameState{
+public abstract class StateArena {
 
     private boolean initialized = false;
 

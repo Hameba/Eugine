@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Game g = new Game("Eugine");
         try {
-            AppGameContainer gc = new AppGameContainer(g, 800, 600, false);
+            AppGameContainer gc = new AppGameContainer(g, 1280, 720, false);
             VH.gc = gc;
             gc.setAlwaysRender(true);
             gc.setTargetFrameRate(30);

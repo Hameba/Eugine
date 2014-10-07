@@ -1,4 +1,4 @@
-package com.duckblade.eugine.api;
+package com.duckblade.eugine.server;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -76,7 +76,7 @@ public class InputManager {
                 if (dataRaw[i].equals("x")) {
                     if (c.ammo > 0) {
                         synchronized (c.getProjectiles()) {
-                            c.getProjectiles().add(new Projectile(c.isFacingLeft() ? c.getX() + 25 : c.getX() + 57, c.getY() + c.getImage().getHeight() / 2, c, c.isFacingLeft()));
+                            c.getProjectiles().add(new Projectile(c.isFacingLeft() ? c.getX() + 25 : c.getX() + 57, c.getY() + 32 / 2, c, c.isFacingLeft()));
                             c.ammo--;
                         }
                     }

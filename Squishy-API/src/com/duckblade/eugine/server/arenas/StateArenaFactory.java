@@ -1,13 +1,13 @@
-package com.duckblade.eugine.api.arenas;
+package com.duckblade.eugine.server.arenas;
 
-import com.duckblade.eugine.api.StateArena;
+import com.duckblade.eugine.server.StateArena;
 
 public class StateArenaFactory extends StateArena {
     protected int getArenaID() {
         return 1;
     }
 
-    protected String getArenaKey() {
+    public String getArenaKey() {
         return "factory";
     }
 }

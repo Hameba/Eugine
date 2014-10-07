@@ -1,6 +1,6 @@
-package com.duckblade.eugine.api.chars;
+package com.duckblade.eugine.server.chars;
 
-import net.llamositopia.eugine.Squishy;
+import com.duckblade.eugine.server.Squishy;
 
 public class SquishyNinja extends Squishy {
     public static SquishyNinja ninja = new SquishyNinja();
