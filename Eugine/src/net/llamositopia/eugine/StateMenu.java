@@ -1,6 +1,6 @@
 package net.llamositopia.eugine;
 
-import com.duckblade.eugine.api.Squishy;
+import com.duckblade.eugine.server.Squishy;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -33,12 +33,9 @@ public class StateMenu extends BasicGameState {
         if (gc.getInput().isKeyPressed(Input.KEY_F11)){
             gc.setFullscreen(!gc.isFullscreen());
         }
-        if (gc.getInput().isKeyDown(Input.KEY_LCONTROL) && gc.getInput().isKeyDown(Input.KEY_LALT) && gc.getInput().isKeyDown(Input.KEY_F8)){
-            NetworkManager.startServer();
-        }
         if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)){
             if (gc.getInput().getMouseX()>gc.getWidth()/2-play.getWidth()/2 && gc.getInput().getMouseX()<gc.getWidth()/2+play.getWidth()/2 && gc.getInput().getMouseY()>gc.getHeight()/2-play.getHeight()/2 && gc.getInput().getMouseY()>gc.getHeight()/2+play.getHeight()/2){
-                sbg.enterState(1);
+                sbg.enterState(2);
             }
             if (gc.getInput().getMouseX()>gc.getWidth()/2-quit.getWidth()/2 && gc.getInput().getMouseX()<gc.getWidth()/2+quit.getWidth()/2 && gc.getInput().getMouseY()>gc.getHeight()/2-quit.getHeight()/2+gc.getHeight()/3 && gc.getInput().getMouseY()>gc.getHeight()/2+quit.getHeight()/2+gc.getHeight()/3){
                 gc.exit();

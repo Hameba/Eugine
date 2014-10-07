@@ -1,4 +1,4 @@
-package com.duckblade.eugine.api;
+package com.duckblade.eugine.server;
 
 import java.util.ArrayList;
 

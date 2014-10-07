@@ -1,4 +1,4 @@
-package com.duckblade.eugine.api;
+package com.duckblade.eugine.server;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;

@@ -1,4 +1,4 @@
-package com.duckblade.eugine.api;
+package com.duckblade.eugine.server;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -7,8 +7,8 @@ import java.net.Socket;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.duckblade.eugine.api.VH.arena;
-import static com.duckblade.eugine.api.VH.mapName;
+import static com.duckblade.eugine.server.VH.arena;
+import static com.duckblade.eugine.server.VH.mapName;
 
 public class NetworkManager {
 
@@ -85,6 +85,7 @@ public class NetworkManager {
                                     }
                                 }
                                 oos.writeObject(options);
+                                oos.flush();
                             }
                         }catch (Exception e){
                             e.printStackTrace();

@@ -1,5 +1,6 @@
 package net.llamositopia.eugine;
 
+import com.duckblade.eugine.server.Squishy;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -41,10 +42,11 @@ public class StateConnect extends BasicGameState {
                     c.setX(-100);
                     c.setY(-100);
                 }
-                NetworkManager.connect(ip);
+                VH.ip = ip;
+                NetworkManager.ping(ip);
             }
             if (gc.getInput().getMouseX()>gc.getWidth()/2-quit.getWidth()/2 && gc.getInput().getMouseX()<gc.getWidth()/2+quit.getWidth()/2 && gc.getInput().getMouseY()>gc.getHeight()/2-quit.getHeight()/2+gc.getHeight()/3 && gc.getInput().getMouseY()>gc.getHeight()/2+quit.getHeight()/2+gc.getHeight()/3){
-                sbg.enterState(0);
+                sbg.enterState(1);
             }
         }
         String add = "";

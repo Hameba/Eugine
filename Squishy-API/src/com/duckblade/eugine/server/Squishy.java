@@ -1,4 +1,4 @@
-package com.duckblade.eugine.api;
+package com.duckblade.eugine.server;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -172,14 +172,14 @@ public abstract class Squishy {
 
     public static Squishy[] values() {
         try {
-            Class.forName("SquishyArcher");
-            Class.forName("SquishyBrainiac");
-            Class.forName("SquishyBruiser");
-            Class.forName("SquishyGenie");
-            Class.forName("SquishyMage");
-            Class.forName("SquishyNinja");
-            Class.forName("SquishyPenguin");
-            Class.forName("SquishyDrunk");
+            Class.forName("com.duckblade.eugine.server.chars.SquishyArcher");
+            Class.forName("com.duckblade.eugine.server.chars.SquishyBrainiac");
+            Class.forName("com.duckblade.eugine.server.chars.SquishyBruiser");
+            Class.forName("com.duckblade.eugine.server.chars.SquishyGenie");
+            Class.forName("com.duckblade.eugine.server.chars.SquishyMage");
+            Class.forName("com.duckblade.eugine.server.chars.SquishyNinja");
+            Class.forName("com.duckblade.eugine.server.chars.SquishyPenguin");
+            Class.forName("com.duckblade.eugine.server.chars.SquishyDrunk");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
