@@ -86,10 +86,12 @@ public class InputManager {
                     }
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            try {
+                ois.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 

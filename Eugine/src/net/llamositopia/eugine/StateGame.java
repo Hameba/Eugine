@@ -1,6 +1,7 @@
 package net.llamositopia.eugine;
 
 import com.duckblade.eugine.api.Floor;
+import com.duckblade.eugine.api.Projectile;
 import com.duckblade.eugine.api.Squishy;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -34,6 +35,9 @@ public class StateGame extends BasicGameState {
         }
         for (Squishy a : Squishy.values()){
             g.drawImage(a.getImage(), a.getX(), a.getY());
+            for (Projectile b : a.getProjectiles()){
+                g.drawImage(a.getProjectile(), b.getX(), b.getY());
+            }
         }
     }
 
