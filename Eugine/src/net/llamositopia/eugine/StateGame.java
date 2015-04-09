@@ -36,7 +36,7 @@ public class StateGame extends BasicGameState {
         for (Squishy a : Squishy.values()){
             g.drawImage(a.getImage(), a.getX(), a.getY());
             for (Projectile b : a.getProjectiles()){
-                g.drawImage(a.getProjectile(), b.getX(), b.getY());
+                g.drawImage(a.getProjectile().getLeft() ? a.getProjectile().getFlippedCopy(true, false) : a.getProjectile(), b.getX(), b.getY());
             }
             g.drawString("Health: " + a.getHealth(), a.getX(), a.getY()-50);
             g.drawString("Lives: " + a.lives, a.getX(), a.getY()-25);
