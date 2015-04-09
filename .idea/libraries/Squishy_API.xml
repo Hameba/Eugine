@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Squishy-API">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Squishy-API/lwjgl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Squishy-API/jogg-0.0.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Squishy-API/jorbis.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Squishy-API/mod_Dependances.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Squishy-API/jinput.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

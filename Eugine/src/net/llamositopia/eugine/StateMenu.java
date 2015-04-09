@@ -33,7 +33,8 @@ public class StateMenu extends BasicGameState {
         if (gc.getInput().isKeyPressed(Input.KEY_F11)){
             gc.setFullscreen(!gc.isFullscreen());
         }
-        if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)){
+        if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
+            System.out.println("X: " + gc.getInput().getMouseX() + "\nY: " + gc.getInput().getMouseY());
             if (gc.getInput().getMouseX()>gc.getWidth()/2-play.getWidth()/2 && gc.getInput().getMouseX()<gc.getWidth()/2+play.getWidth()/2 && gc.getInput().getMouseY()>gc.getHeight()/2-play.getHeight()/2 && gc.getInput().getMouseY()>gc.getHeight()/2+play.getHeight()/2){
                 sbg.enterState(2);
             }
